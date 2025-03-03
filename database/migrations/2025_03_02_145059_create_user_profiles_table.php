@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Address;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -15,13 +16,16 @@ return new class extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class,'user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignIdFor(Address::class,'address_id')->nullable()->constrained('addresses')->cascadeOnDelete();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
             $table->enum('gender',['Male','Female'])->nullable();
             $table->date('dob')->nullable();
             $table->string('pob')->nullable();
-
+            $table->string('emergency_contact')->nullable();
+            $table->string('emergency_phone')->nullable();
+            $table->string('emergency_email')->nullable();
             $table->timestamps();
         });
     }
