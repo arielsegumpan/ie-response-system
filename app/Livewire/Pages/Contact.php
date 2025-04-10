@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 class Contact extends Component
 {
     #[Layout('layouts.app')]
-    #[Title('Home')]
+    #[Title('Contact')]
     public function render()
     {
         return view('livewire.pages.contact');

@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 class Blog extends Component
 {
     #[Layout('layouts.app')]
-    #[Title('Home')]
+    #[Title('Blog')]
     public function render()
     {
         return view('livewire.pages.blog');

@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 class Isugid extends Component
 {
     #[Layout('layouts.app')]
-    #[Title('Home')]
+    #[Title('Isugid')]
     public function render()
     {
         return view('livewire.pages.isugid');
