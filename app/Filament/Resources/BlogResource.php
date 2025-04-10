@@ -413,7 +413,7 @@ class BlogResource extends Resource
                     ])
                     ->columnSpanFull(),
 
-                    TextEntry::make('tags.name')
+                    TextEntry::make('tags.tag_name')
                     ->badge()
                     ->separator(',')
                     ->label(__('Tags'))
@@ -429,7 +429,7 @@ class BlogResource extends Resource
                     ->badge()
                     ->separator(',')
                     ->label(__('Categories'))
-                    ->color('primary')
+                    ->color('warning')
                     ->columnSpan([
                         'sm' => 1,
                         'md' => 2,

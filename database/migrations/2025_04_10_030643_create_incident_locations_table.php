@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('incident_locations', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Incident::class, 'incident_id')->constrained('incidents')->cascadeOnDelete();
-            $table->decimal('latitude', 10, 7);
-            $table->decimal('longitude', 10, 7);
+            $table->decimal('latitude', 12, 9);
+            $table->decimal('longitude', 12, 9);
             $table->text('location_description')->nullable();
             $table->text('landmark')->nullable();
             $table->timestamps();

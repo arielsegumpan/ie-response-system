@@ -2,16 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TagResource\Pages;
-use App\Filament\Resources\TagResource\RelationManagers;
 use App\Models\Tag;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Set;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
+use Filament\Support\Enums\FontWeight;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\TagResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\TagResource\RelationManagers;
 
 class TagResource extends Resource
 {
@@ -25,7 +32,39 @@ class TagResource extends Resource
     {
         return $form
             ->schema([
-                //
+
+                Section::make()
+                ->schema([
+                    TextInput::make('tag_name')
+                    ->required()
+                    ->label(__('Name'))
+                    ->placeholder(__('Tag Name'))
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) =>
+                        $set('tag_slug', Str::slug($state))),
+
+                    TextInput::make('tag_slug')
+                    ->label(__('Slug'))
+                    ->disabled()
+                    ->dehydrated()
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(Tag::class, 'tag_slug', ignoreRecord: true),
+
+                    Textarea::make('tag_desc')
+                    ->label(__('Description'))
+                    ->rows(5)
+                    ->placeholder(__('Description'))
+                    ->maxLength(1024)
+                    ->columnSpanFull()
+                ])
+                ->columns([
+                    'sm' => 1,
+                    'md' => 2,
+                    'lg' => 2,
+                ])
+
             ]);
     }
 
@@ -33,7 +72,23 @@ class TagResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('tag_name')
+                    ->label(__('Name'))
+                    ->searchable()
+                    ->sortable()
+                    ->weight(FontWeight::Bold)
+                    ->formatStateUsing(fn ($state) => ucwords($state)),
+
+                TextColumn::make('tag_slug')
+                    ->label(__('Slug'))
+                    ->badge()
+                    ->color('primary'),
+
+                TextColumn::make('tag_desc')
+                    ->label(__('Description'))
+                    ->limit(70)
+                    ->wrap()
+                    ->formatStateUsing(fn ($state) => ucfirst($state))
             ])
             ->filters([
                 //
