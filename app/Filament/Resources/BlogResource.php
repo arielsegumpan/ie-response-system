@@ -18,21 +18,34 @@ use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
+use Filament\Support\Enums\FontWeight;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Pages\SubNavigationPosition;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
 use App\Filament\Resources\BlogResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Infolists\Components\Group as InfoGroup;
 use App\Filament\Resources\BlogResource\RelationManagers;
+use Filament\Infolists\Components\Section as InfoSection;
 
 class BlogResource extends Resource
 {
     protected static ?string $model = Blog::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
+
+    protected static ?string $navigationGroup = 'Posts';
 
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
@@ -171,17 +184,27 @@ class BlogResource extends Resource
 
                         Section::make()
                         ->schema([
-                            TextInput::make('meta_title')
-                            ->label(__('Meta Title'))
-                            ->required()
-                            ->maxLength(255)
-                            ->placeholder(__('Meta title of your blog post'))
-                            ->live(onBlur: true),
 
-                            TextInput::make('meta_description')
-                            ->label(__('Meta Description'))
+                            TextInput::make('metadata.seo_title')
+                            ->label(__('SEO Title'))
+                            ->maxLength(255),
 
-                        ])
+                            Textarea::make('metadata.seo_description')
+                            ->label(__('SEO Description'))
+                            ->rows(4)
+                            ->maxLength(300),
+
+                            TagsInput::make('metadata.seo_keywords')
+                            ->label(__('SEO Keywords'))
+                            ->separator(',')
+                            ->reorderable()
+                            ->color('danger')
+                            ->nestedRecursiveRules([
+                                'min:3',
+                                'max:255',
+                            ])
+
+                        ]),
 
 
                     ])
@@ -200,13 +223,51 @@ class BlogResource extends Resource
     {
         return $table
             ->columns([
-                //
+                ImageColumn::make('featured_img')
+                ->label(__(''))
+                ->square(),
+
+                TextColumn::make('title')
+                ->label(__('Title'))
+                ->searchable()
+                ->sortable()
+                ->limit(50)
+                ->description(fn (Blog $record) => $record->slug)
+                ->size(TextColumn\TextColumnSize::Large)
+                ->weight(FontWeight::Bold),
+
+                TextColumn::make('status')
+                ->label(__('Status'))
+                ->icon(fn (string $state): string => match ($state) {
+                    'draft' => 'heroicon-o-pencil',
+                    'published' => 'heroicon-o-check-circle',
+                })
+                ->color(fn (string $state): string => match ($state) {
+                    'draft' => 'warning',
+                    'published' => 'success',
+                })
+                ->badge()
+                ->formatStateUsing(fn (string $state): string => strtoupper($state))
+                ->tooltip(fn (string $state): string => match ($state) {
+                    'draft' => __('Draft'),
+                    'published' => __('Published'),
+                }),
+
+                ToggleColumn::make('is_featured')
+                ->label(__('Is Featured?')),
+
+                ToggleColumn::make('is_visible')
+                ->label(__('Is Visible'))
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])->tooltip('Actions')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -253,6 +314,176 @@ class BlogResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
-            ->schema([]);
+            ->schema([
+
+                InfoSection::make()
+                ->schema([
+
+                    InfoGroup::make([
+                        ImageEntry::make('featured_img')
+                        ->hiddenLabel()
+                        ->width('100%')
+                        ->height(200)
+                        ->grow(false)
+                        ->columnSpan([
+                            'sm' => 1,
+                            'md' => 1,
+                            'lg' => 1,
+                        ]),
+
+                        InfoGroup::make([
+                            TextEntry::make('title')
+                            ->label(__('Title'))
+                            ->size(TextEntry\TextEntrySize::Large)
+                            ->weight(FontWeight::Bold),
+
+                            TextEntry::make('slug')
+                            ->label(__('Slug'))
+                            ->badge()
+                            ->color('primary')
+
+                        ])
+                        ->columnSpan([
+                            'sm' => 1,
+                            'md' => 1,
+                            'lg' => 2,
+                        ]),
+                    ])
+                    ->columns([
+                        'sm' => 1,
+                        'md' => 2,
+                        'lg' => 3,
+                    ]),
+                ])
+                ->columnSpanFull(),
+
+                // status
+                InfoSection::make()
+                ->schema([
+                    InfoGroup::make([
+                        TextEntry::make('status')
+                        ->label(__('Status'))
+                        ->badge()
+                        ->color(fn (string $state): string => match ($state) {
+                            'draft' => 'warning',
+                            'published' => 'success',
+                        })
+                        ->icon(fn (string $state): string => match ($state) {
+                            'draft' => 'heroicon-o-pencil',
+                            'published' => 'heroicon-o-check-circle',
+                        })
+                        ->formatStateUsing(fn (string $state): string => strtoupper($state)),
+
+                        TextEntry::make('is_featured')
+                        ->label(__('Is featured on the homepage?'))
+                        ->badge()
+                        ->color(fn (int $state): string => match ($state) {
+                            0 => 'danger',
+                            1 => 'success',
+                        })
+                        ->icon(fn (int $state): string => match ($state) {
+                            0 => 'heroicon-o-x-circle',
+                            1 => 'heroicon-o-check-circle',
+                        })
+                        ->formatStateUsing(fn (int $state): string => match ($state) {
+                            0 => __('No'),
+                            1 => __('Yes'),
+                        }),
+
+                        TextEntry::make('is_visible')
+                        ->label(__('Is visible to the public?'))
+                        ->badge()
+                        ->color(fn (int $state): string => match ($state) {
+                            0 => 'danger',
+                            1 => 'success',
+                        })
+                        ->icon(fn (int $state): string => match ($state) {
+                            0 => 'heroicon-o-x-circle',
+                            1 => 'heroicon-o-check-circle',
+                        })
+                        ->formatStateUsing(fn (int $state): string => match ($state) {
+                            0 => __('No'),
+                            1 => __('Yes'),
+                        })
+                    ])
+                    ->columns([
+                        'sm' => 1,
+                        'md' => 3,
+                        'lg' => 3,
+                    ])
+                    ->columnSpanFull(),
+
+                    TextEntry::make('tags.name')
+                    ->badge()
+                    ->separator(',')
+                    ->label(__('Tags'))
+                    ->color('warning')
+                    ->columnSpan([
+                        'sm' => 1,
+                        'md' => 2,
+                        'lg' => 2,
+                    ])
+                    ->placeholder(__('No tags assigned')),
+
+                    TextEntry::make('categories.cat_name')
+                    ->badge()
+                    ->separator(',')
+                    ->label(__('Categories'))
+                    ->color('primary')
+                    ->columnSpan([
+                        'sm' => 1,
+                        'md' => 2,
+                        'lg' => 2,
+                    ])
+                    ->placeholder(__('No categories assigned')),
+                ])
+                ->columns([
+                    'sm' => 1,
+                    'md' => 4,
+                    'lg' => 4,
+                ]),
+                // end of status
+
+                // content
+                InfoSection::make([
+                    TextEntry::make('content')
+                    ->hiddenlabel(__('Content'))
+                    ->html()
+                    ->columnSpanFull(),
+                ])
+                ->columns([
+                    'sm' => 1,
+                    'md' => 3,
+                    'lg' => 3,
+                ]),
+
+                InfoSection::make('SEO')
+                ->description(__('Search Engine Optimization (SEO)'))
+                ->collapsible()
+                ->schema([
+                    TextEntry::make('metadata.seo_title')
+                    ->label(__('SEO Title'))
+                    ->columnSpanFull()
+                    ->size(TextEntry\TextEntrySize::Large)
+                    ->weight(FontWeight::Bold),
+
+                    TextEntry::make('metadata.seo_description')
+                    ->label(__('SEO Description'))
+                    ->columnSpanFull(),
+
+                    TextEntry::make('metadata.seo_keywords')
+                    ->label(__('SEO Keywords'))
+                    ->separator(',')
+                    ->badge()
+                    ->color('success')
+                ])
+                ->columns([
+                    'sm' => 1,
+                    'md' => 3,
+                    'lg' => 3,
+                ]),
+
+
+            ]);
     }
 }

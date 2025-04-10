@@ -17,7 +17,9 @@ class TagResource extends Resource
 {
     protected static ?string $model = Tag::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-hashtag';
+
+    protected static ?string $navigationGroup = 'Posts';
 
     public static function form(Form $form): Form
     {
@@ -37,13 +39,26 @@ class TagResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])->tooltip('Actions')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->deferLoading()
+            ->emptyStateActions([
+                Tables\Actions\CreateAction::make()
+                ->icon('heroicon-m-plus')
+                ->label(__('New Tag')),
+            ])
+            ->emptyStateIcon('heroicon-o-hashtag')
+            ->emptyStateHeading('No Tags are created')
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
