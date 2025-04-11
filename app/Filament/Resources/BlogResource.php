@@ -43,7 +43,7 @@ class BlogResource extends Resource
 {
     protected static ?string $model = Blog::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
+    protected static ?string $navigationIcon = null;
 
     protected static ?string $navigationGroup = 'Posts';
 
