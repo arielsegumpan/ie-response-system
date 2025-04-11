@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\Tag;
 use Filament\Forms;
 use App\Models\Blog;
 use Filament\Tables;
 use Filament\Forms\Set;
+use App\Models\Category;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
@@ -116,7 +118,40 @@ class BlogResource extends Resource
                             ->searchable()
                             ->placeholder(__('Select categories'))
                             ->optionsLimit(6)
-                            ->native(false),
+                            ->native(false)
+                            ->createOptionForm([
+                                Group::make()
+                                ->schema([
+                                    TextInput::make('cat_name')
+                                    ->required()
+                                    ->label(__('Name'))
+                                    ->placeholder(__('Category Name'))
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) =>
+                                        $set('cat_slug', Str::slug($state))),
+
+                                    TextInput::make('cat_slug')
+                                    ->label(__('Slug'))
+                                    ->disabled()
+                                    ->dehydrated()
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->unique(Category::class, 'cat_slug', ignoreRecord: true),
+
+                                    Textarea::make('cat_desc')
+                                    ->label(__('Description'))
+                                    ->rows(5)
+                                    ->placeholder(__('Description'))
+                                    ->maxLength(1024)
+                                    ->columnSpanFull()
+                                ])
+                                ->columns([
+                                    'sm' => 1,
+                                    'md' => 2,
+                                    'lg' => 2,
+                                ])
+                            ]),
 
                             Select::make('tags')
                             ->label(__('Tags'))
@@ -126,7 +161,40 @@ class BlogResource extends Resource
                             ->searchable()
                             ->placeholder(__('Select tags'))
                             ->optionsLimit(6)
-                            ->native(false),
+                            ->native(false)
+                            ->createOptionForm([
+                                Group::make()
+                                ->schema([
+                                    TextInput::make('tag_name')
+                                    ->required()
+                                    ->label(__('Name'))
+                                    ->placeholder(__('Tag Name'))
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn (Set $set, ?string $state) =>
+                                        $set('tag_slug', Str::slug($state))),
+
+                                    TextInput::make('tag_slug')
+                                    ->label(__('Slug'))
+                                    ->disabled()
+                                    ->dehydrated()
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->unique(Tag::class, 'tag_slug', ignoreRecord: true),
+
+                                    Textarea::make('tag_desc')
+                                    ->label(__('Description'))
+                                    ->rows(5)
+                                    ->placeholder(__('Description'))
+                                    ->maxLength(1024)
+                                    ->columnSpanFull()
+                                ])
+                                ->columns([
+                                    'sm' => 1,
+                                    'md' => 2,
+                                    'lg' => 2,
+                                ])
+                            ]),
 
                             ToggleButtons::make('status')
                             ->label(__('Status'))

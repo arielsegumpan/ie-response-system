@@ -192,6 +192,7 @@ class EditProfile extends BaseEditProfile
     {
         $data['profile'] = auth()->user()->profile?->toArray() ?? [];
 
+        dd($data);
         return $data;
     }
 
@@ -200,11 +201,15 @@ class EditProfile extends BaseEditProfile
         $profileData = $data['profile'] ?? [];
         unset($data['profile']);
 
+        dd($profileData);
         return $data;
     }
 
     public function save(): void
     {
+
+        dd($this->form->getState());
+
         $this->validate();
 
         $data = $this->form->getState();

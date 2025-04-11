@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('org_email')->unique()->nullable();
             $table->string('org_contact_person')->nullable();
             $table->string('org_contact_phone')->nullable();
+            $table->string('org_contact_email')->nullable();
+            $table->string('org_img')->nullable();
             $table->text('org_description')->nullable();
             $table->timestamps();
         });

@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('incident_types', function (Blueprint $table) {
             $table->id();
             $table->string('inc_name')->unique();
+            $table->string('inc_slug')->unique();
             $table->text('inc_description')->nullable();
-            $table->integer('inc_severity_scale')->default(1); // 1-5 scale
-            $table->json('inc_required_resources')->nullable();
             $table->timestamps();
         });
     }

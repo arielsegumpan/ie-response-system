@@ -18,8 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class,'reporter_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignIdFor(IncidentType::class, 'incident_type_id')->nullable()->constrained('incident_types')->cascadeOnDelete();
             $table->foreignId('verified_by')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->string('title')->unique();
-            $table->string('slug')->unique();
+            $table->string('incident_number')->unique()->index();
             $table->longText('description');
             $table->enum('status', ['reported','verified','in_progress','resolved','closed'])->default('reported');
             $table->timestamp('verification_date')->useCurrent();

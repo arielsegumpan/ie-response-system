@@ -17,6 +17,8 @@ class Organization extends Model
         'org_email',
         'org_contact_person',
         'org_contact_phone',
+        'org_contact_email',
+        'org_img',
         'org_description',
     ];
 
@@ -28,5 +30,10 @@ class Organization extends Model
     public function volunteers() : HasMany
     {
         return $this->hasMany(Volunteer::class);
+    }
+
+    public function organizationType() : BelongsTo
+    {
+        return $this->belongsTo(OrganizationType::class);
     }
 }
