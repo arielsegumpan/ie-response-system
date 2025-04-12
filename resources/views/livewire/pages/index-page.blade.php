@@ -111,7 +111,6 @@
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Name</th>
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Age</th>
                       <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Address</th>
-                      <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Action</th>
                     </tr>
                   </thead>
                   <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
@@ -125,9 +124,7 @@
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">John Brown</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">45</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">New York No. 1 Lake Park</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                        <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 focus:outline-hidden focus:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:text-red-400">Delete</button>
-                      </td>
+
                     </tr>
 
                     <tr>
@@ -140,9 +137,7 @@
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Jim Green</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">27</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">London No. 1 Lake Park</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                        <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 focus:outline-hidden focus:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:text-red-400">Delete</button>
-                      </td>
+
                     </tr>
 
                     <tr>
@@ -155,9 +150,7 @@
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Joe Black</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">31</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">Sidney No. 1 Lake Park</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                        <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 focus:outline-hidden focus:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:text-red-400">Delete</button>
-                      </td>
+
                     </tr>
 
                     <tr>
@@ -170,9 +163,7 @@
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Edward King</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">16</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">LA No. 1 Lake Park</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                        <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 focus:outline-hidden focus:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:text-red-400">Delete</button>
-                      </td>
+
                     </tr>
 
                     <tr>
@@ -185,9 +176,7 @@
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Jim Red</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">45</td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">Melbourne No. 1 Lake Park</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                        <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-red-600 hover:text-red-800 focus:outline-hidden focus:text-red-800 disabled:opacity-50 disabled:pointer-events-none dark:text-red-500 dark:hover:text-red-400 dark:focus:text-red-400">Delete</button>
-                      </td>
+
                     </tr>
                   </tbody>
                 </table>
@@ -247,22 +236,39 @@
 
     @push('scripts')
         <script>
+            window.incidents = @json($incidents);
+
             window.addEventListener('load', () => {
-            (function () {
                 const map = L.map('hs-pin-leaflet', {
-                center: [10.901002750609775, 123.07139009929351],
-                zoom: 15,
-                maxBoundsViscosity: 1.0
+                    center: [10.901002750609775, 123.07139009929351],
+                    zoom: 13,
                 });
 
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                minZoom: 2,
-                attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    maxZoom: 19,
+                    minZoom: 2,
+                    attribution: '© OpenStreetMap contributors'
                 }).addTo(map);
 
-                L.marker([10.901002750609775, 123.07139009929351]).bindPopup('This is Victorias, City.').addTo(map);
-            })();
+                function createPopupContent(inc_name, created_at) {
+                    return `
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">${inc_name}</h3>
+                        <div class="text-sm text-gray-500 dark:text-neutral-500">${created_at}</div>
+                    </div>
+                    `;
+                }
+
+                // Add dynamic markers
+                if (window.incidents) {
+                    window.incidents.forEach((incident) => {
+                        if (incident.location.latitude && incident.location.longitude) {
+                            L.marker([incident.location.latitude, incident.location.longitude])
+                                .bindPopup(createPopupContent(incident.type.inc_name, incident.formatted_created_at))
+                                .addTo(map);
+                        }
+                    });
+                }
             });
         </script>
     @endpush
