@@ -30,10 +30,10 @@ The system is designed to:
 
 This project is proudly developed and researched by the following team:
 
--   **Michael Jay Gamboa**
--   **Ronan Lance S. Losaria**
--   **Roland Ivan L. Ybañez**
--   **Jon Lawrence P. Ella**
+-   **[Michael Jay Gamboa](https://www.facebook.com/gamboa11)**
+-   **[Ronan Lance S. Losaria](https://www.facebook.com/ronanlance.losaria)**
+-   **[Roland Ivan L. Ybañez](https://www.facebook.com/ivan.ybanez.77398)**
+-   **[Jon Lawrence P. Ella]()**
 
 ---
 
