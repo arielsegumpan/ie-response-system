@@ -194,14 +194,12 @@ class IncidentResource extends Resource
                             TextInput::make('latitude')
                             ->label('Latitude')
                             ->required()
-                            ->maxLength(255)
-                            ->readonly(),
+                            ->maxLength(255),
 
                             TextInput::make('longitude')
                             ->label('Longitude')
                             ->required()
-                            ->maxLength(255)
-                            ->readonly(),
+                            ->maxLength(255),
 
                             Textarea::make('geojson')
                             ->hidden()
@@ -216,7 +214,7 @@ class IncidentResource extends Resource
                         ]),
 
                         Map::make('location')
-                        ->label('Map Picker')
+                        ->label(__('Incident Location'))
                         ->columnSpanFull()
                         // Basic Configuration
                         ->defaultLocation(latitude: 10.901002750609775, longitude: 123.07139009929351)
@@ -268,13 +266,13 @@ class IncidentResource extends Resource
                             $set('geojson', json_encode($state['geojson']));
                         })
 
-                        ->afterStateHydrated(function ($state, $record, Set $set): void {
-                            $set('location', [
-                                'lat' => $record->latitude,
-                                'lng' => $record->longitude,
-                                'geojson' => json_decode(strip_tags($record->description))
-                            ]);
-                        })
+                        // ->afterStateHydrated(function ($state, $record, Set $set): void {
+                        //     $set('location', [
+                        //         'lat' => $record->latitude,
+                        //         'lng' => $record->longitude,
+                        //         'geojson' => json_decode(strip_tags($record->description))
+                        //     ]);
+                        // })
 
 
                         ,

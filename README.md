@@ -115,3 +115,11 @@ This project is proudly developed and researched by the following team:
 For inquiries or collaborations, please contact any of the research members listed above or reach out via our GitHub repository.
 
 > ## This system is part of an academic research project for community-focused emergency response solutions.
+
+## Screenshots
+
+![FireShot Capture 128 - Home -  ie-response-system test](https://github.com/user-attachments/assets/91e61ef6-8c45-48c6-851c-d68bb239d967)
+
+![FireShot Capture 129 - Blog -  ie-response-system test](https://github.com/user-attachments/assets/35a61a81-51da-404d-b4ab-929c95fb0f89)
+
+![FireShot Capture 131 - Create Incident - IE Response System -  ie-response-system test](https://github.com/user-attachments/assets/d5307a5a-164c-4798-bedc-2fa7961c2e7f)
