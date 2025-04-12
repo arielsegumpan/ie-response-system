@@ -3,13 +3,14 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Blog;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
-use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 
 class BlogShow extends Component
 {
     public Blog $blog;
+    public Collection $relatedBlogs;
     public array $meta = [];
 
     public function mount($slug)
@@ -20,6 +21,12 @@ class BlogShow extends Component
         ])->where('slug', $slug)->firstOrFail();
 
         $this->meta = $this->blog->metadata ?? [];
+
+        $this->relatedBlogs = Blog::where('user_id', $this->blog->user_id)
+            ->where('id', '!=', $this->blog->id)
+            ->latest()
+            ->take(5)
+            ->get();
     }
 
     #[Layout('layouts.app')]

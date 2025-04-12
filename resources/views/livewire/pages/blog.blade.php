@@ -25,12 +25,12 @@
                 <!-- Avatar -->
                 <div class="mt-6 sm:mt-10 flex items-center">
                     <div class="shrink-0">
-                        <img class="size-10 sm:h-14 sm:w-14 rounded-full" src="{{ $featuredPost->user->avatar_url ?? 'https://ui-avatars.com/api/?name=' . $featuredPost->user->name . '&background=f44336&color=fff' }}" alt="Author">
+                        <img class="size-10 sm:h-14 sm:w-14 rounded-full" src="{{ $featuredPost->user->avatar_url ?? 'https://ui-avatars.com/api/?name=' . $featuredPost->user->name . '&background=f44336&color=fff' }}" alt="{{ $featuredPost->user->name }}">
                     </div>
 
                     <div class="ms-3 sm:ms-4">
                         <p class="sm:mb-1 font-semibold text-gray-800 dark:text-neutral-200">
-                            {{ $featuredPost->author_name ?? 'Unknown Author' }}
+                            {{ $featuredPost->user->name ?? 'Unknown Author' }}
                         </p>
                         <p class="text-xs text-gray-500 dark:text-neutral-500">
                             {{ $featuredPost->author_role ?? 'Contributor' }}
@@ -40,7 +40,7 @@
 
                 <div class="mt-5">
                     <a class="inline-flex items-center gap-x-1.5 text-red-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-red-500" href="{{ route('page.blog.show', $featuredPost->slug) }}">
-                        Read more
+                        {{ __('Read more') }}
                         <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
                     </a>
                 </div>
@@ -57,7 +57,7 @@
         <div class="grid lg:grid-cols-2 gap-6">
             @foreach ($blogs as $post)
                 <!-- Card -->
-                <a class="group relative block rounded-xl focus:outline-hidden" href="{{ route('page.blog.show', $post->slug) }}">
+                <a wire:key="blog-{{ $post->id }}" class="group relative block rounded-xl focus:outline-hidden" href="{{ route('page.blog.show', $post->slug) }}">
 
                     <div class="shrink-0 relative rounded-xl overflow-hidden w-full h-87.5 before:absolute before:inset-x-0 before:z-1 before:size-full before:bg-linear-to-t before:from-gray-900/70">
                         <img class="size-full absolute top-0 start-0 object-cover"

@@ -213,6 +213,38 @@
     </div>
 
 
+    <!-- Card Blog -->
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <!-- Title -->
+        <div class="max-w-2xl text-center mx-auto mb-10 lg:mb-14">
+            <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Read our latest news and blogs</h2>
+            <p class="mt-1 text-gray-600 dark:text-neutral-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae distinctio quisquam repellat.</p>
+        </div>
+        <!-- End Title -->
+
+        <!-- Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 lg:mb-14">
+            @foreach ($featuredPosts as $featPost)
+            <!-- Card -->
+            <a wire:key="blog-{{ $featPost->id }}" class="group flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-md focus:outline-hidden focus:shadow-md transition dark:bg-neutral-900 dark:border-neutral-800" href="{{ route('page.blog.show', $featPost->slug) }}">
+                <div class="aspect-w-16 aspect-h-9">
+                <img class="w-full object-cover rounded-t-xl h-[300px] lg:h-[200px] md:h-[250px]" src="{{ asset(Storage::url($featPost->featured_img)) }}" alt="{{ $featPost->title }}">
+                </div>
+                <div class="p-4 md:p-5">
+                <p class="mt-2 text-xs uppercase text-gray-600 dark:text-neutral-400">
+                    {{ $featPost->categories->first()->cat_name ?? 'Uncategorized' }}
+                </p>
+                <h3 class="mt-2 text-lg font-medium text-gray-800 group-hover:text-red-600 dark:text-neutral-300 dark:group-hover:text-white">
+                    {{ $featPost->title }}
+                </h3>
+                </div>
+            </a>
+            <!-- End Card -->
+            @endforeach
+    </div>
+    <!-- End Card Blog -->
+
+
     @push('scripts')
         <script>
             window.addEventListener('load', () => {
