@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Blog extends Model
@@ -34,5 +35,9 @@ class Blog extends Model
         return $this->belongsToMany(Tag::class, 'blog_tag', 'blog_id', 'tag_id')->withTimestamps();
     }
 
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

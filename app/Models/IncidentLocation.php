@@ -14,6 +14,7 @@ class IncidentLocation extends Model
         'incident_id',
         'latitude',
         'longitude',
+        'geojson',
         'location_description',
         'landmark',
     ];
@@ -21,6 +22,7 @@ class IncidentLocation extends Model
     protected $casts = [
         'latitude' => 'float',
         'longitude' => 'float',
+        'geojson' => 'array',
     ];
 
     public function incident() : BelongsTo
