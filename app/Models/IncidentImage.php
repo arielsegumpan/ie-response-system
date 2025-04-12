@@ -15,6 +15,10 @@ class IncidentImage extends Model
         'image_path',
     ];
 
+    protected $casts = [
+        'image_path' => 'array'
+    ];
+
     public function incident() : BelongsTo
     {
         return $this->belongsTo(Incident::class);

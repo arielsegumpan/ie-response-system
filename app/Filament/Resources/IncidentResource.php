@@ -8,13 +8,28 @@ use Filament\Forms\Set;
 use App\Models\Incident;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Enums\PriorityEnum;
+use Illuminate\Support\Str;
+use App\Models\IncidentType;
 use Filament\Resources\Resource;
+use App\Enums\IncidentStatusEnum;
 use Dotswan\MapPicker\Fields\Map;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
+use Filament\Support\Enums\FontWeight;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\ToggleButtons;
 use App\Filament\Resources\IncidentResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\IncidentResource\RelationManagers;
@@ -30,108 +45,240 @@ class IncidentResource extends Resource
         return $form
             ->schema([
 
-
-                // Incident Location
-                Section::make()
+                Grid::make([
+                    'default' => 1,
+                    'sm' => 2,
+                    'md' => 4,
+                    'lg' => 5,
+                ])
                 ->schema([
-
                     Group::make([
-                        TextInput::make('latitude')
-                        ->label('Latitude')
-                        ->required()
-                        ->maxLength(255),
+                        Section::make()
+                        ->schema([
 
-                        TextInput::make('longitude')
-                        ->label('Longitude')
-                        ->required()
-                        ->maxLength(255),
+                            Hidden::make('user_id')
+                            ->default(auth()->user()->id)
+                            ->dehydrated(),
+
+                            TextInput::make('incident_number')
+                            ->label('Incident Number')
+                            ->required()
+                            ->unique(Incident::class, 'incident_number', ignoreRecord: true)
+                            ->maxLength(255)
+                            ->disabled()
+                            ->default('INC#' . '-' . strtoupper(Str::random(6)) . '-' . rand(500, 9999))
+                            ->dehydrated(),
+
+                            Select::make('incident_type_id')
+                            ->label('Incident Type')
+                            ->relationship(name: 'type', titleAttribute: 'inc_name')
+                            ->required()
+                            ->searchable()
+                            ->preload()
+                            ->optionsLimit(6)
+                            ->native(false)
+                            ->createOptionForm([
+                                Section::make()
+                                ->schema([
+                                    Group::make([
+                                        TextInput::make('inc_name')
+                                        ->required()
+                                        ->label(__('Incident Name'))
+                                        ->unique(IncidentType::class, 'inc_name', ignoreRecord: true)
+                                        ->maxLength(255)
+                                        ->live(onBlur: true)
+                                        ->afterStateUpdated(fn (Set $set, ?string $state) => $set('inc_slug', Str::slug($state))),
+
+                                        TextInput::make('inc_slug')
+                                        ->label(__('Slug'))
+                                        ->disabled()
+                                        ->dehydrated()
+                                        ->required()
+                                        ->maxLength(255)
+                                        ->unique(IncidentType::class, 'inc_slug', ignoreRecord: true),
+                                    ])
+                                    ->columns([
+                                        'sm' => 1,
+                                        'md' => 2,
+                                        'lg' => 2
+                                    ]),
+
+                                    Textarea::make('inc_description')
+                                    ->label(__('Description'))
+                                    ->rows(5)
+                                    ->maxLength(1024)
+                                    ->columnSpanFull(),
+
+                                ])
+                            ]),
+
+                            RichEditor::make('description')
+                            ->label('Description')
+                            ->required()
+                            ->maxLength(65535),
+
+                            ToggleButtons::make('status')
+                            ->label('Status')
+                            ->options(IncidentStatusEnum::class)
+                            ->inline()
+                            ->default(IncidentStatusEnum::REPORTED)
+                            ->dehydrated()
+                            ->required(),
+
+                            ToggleButtons::make('priority')
+                            ->label('Priority')
+                            ->options(PriorityEnum::class)
+                            ->inline()
+                            ->default(PriorityEnum::MEDIUM)
+                            ->dehydrated()
+                            ->required(),
+
+                        ]),
+
+                        Section::make('Upload Attachments')
+                        ->schema([
+
+                            Repeater::make('images')
+                            ->hiddenlabel()
+                            ->relationship('images')
+                            ->schema([
+                                FileUpload::make('image_path')
+                                ->hiddenlabel()
+                                ->image()
+                                ->imageEditor()
+                                ->imageResizeMode('cover')
+                                ->imageCropAspectRatio('16:9')
+                                ->imageResizeTargetWidth('1920')
+                                ->imageResizeTargetHeight('1080')
+                                ->reorderable()
+                                ->appendFiles()
+                                ->uploadingMessage('Uploading attachment...')
+                                ->maxSize(2048)
+                                ->maxFiles(5)
+                            ])
+                            ->addActionLabel('Add Attachment')
+                            ->reorderable()
+                            ->reorderableWithButtons()
+                            ->reorderableWithDragAndDrop()
+                            ->collapsible()
+                            ->grid([
+                                'sm' => 1,
+                                'md' => 2,
+                                'lg' => 2,
+                                'xl' => 2
+                            ])
+
+
+                        ])
                     ])
-                    ->columns([
+                    ->columnSpan([
+                        'sm' => 1,
+                        'md' => 2,
+                        'lg' => 3
+                    ]),
+
+                    // Incident Location
+                    Section::make()
+                    ->relationship('location')
+                    ->schema([
+                        Group::make([
+                            TextInput::make('latitude')
+                            ->label('Latitude')
+                            ->required()
+                            ->maxLength(255)
+                            ->readonly(),
+
+                            TextInput::make('longitude')
+                            ->label('Longitude')
+                            ->required()
+                            ->maxLength(255)
+                            ->readonly(),
+
+                        ])
+                        ->columns([
+                            'sm' => 1,
+                            'md' => 2,
+                            'lg' => 2
+
+                        ]),
+
+                        Map::make('location')
+                        ->label('Map Picker')
+                        ->columnSpanFull()
+                        // Basic Configuration
+                        ->defaultLocation(latitude: 10.901002750609775, longitude: 123.07139009929351)
+                        ->draggable(true)
+                        ->clickable(true)
+                        ->zoom(14)
+                        ->minZoom(2)
+                        ->maxZoom(19)
+                        ->tilesUrl("https://tile.openstreetmap.de/{z}/{x}/{y}.png")
+                        ->detectRetina(true)
+
+                        // Marker Configuration
+                        ->showMarker(true)
+
+                        // Controls
+                        ->showFullscreenControl(true)
+                        ->showZoomControl(true)
+
+                        // Location Features
+                        ->liveLocation(true, true, 5000)
+                        ->showMyLocationButton(true)
+                        ->rangeSelectField('distance')
+
+                        // Extra Customization
+                        ->extraStyles([
+                            'min-height: 50vh',
+                            'border-radius: 1rem'
+                        ])
+                        ->extraControl(['customControl' => true])
+                        ->extraTileControl(['customTileOption' => 'value'])
+
+                        // State Management
+                        ->afterStateUpdated(function (Set $set, ?array $state): void {
+                            $set('latitude', $state['lat']);
+                            $set('longitude', $state['lng']);
+                            $set('geojson', json_encode($state['geojson']));
+                        })
+
+                        ->afterStateHydrated(function ($state, $record, Set $set): void {
+                            $set('location', [
+                                'lat' => $record->latitude,
+                                'lng' => $record->longitude,
+                                'geojson' => json_decode(strip_tags($record->description))
+                            ]);
+                        })
+
+
+                        ,
+
+
+                        Group::make([
+                            Textarea::make('location_description')
+                            ->label('Location Description')
+                            ->maxLength(65535)
+                            ->rows(6),
+
+                            Textarea::make('landmark')
+                            ->label('Landmark')
+                            ->maxLength(65535)
+                            ->rows(6),
+                        ])
+
+
+
+                    ])
+                    ->columnSpan([
                         'sm' => 1,
                         'md' => 2,
                         'lg' => 2
-
-                    ]),
-
-                    Map::make('location')
-                    ->label('Map Picker')
-                    ->columnSpanFull()
-                    // Basic Configuration
-                    ->defaultLocation(latitude: 10.901002750609775, longitude: 123.07139009929351)
-                    ->draggable(true)
-                    ->clickable(true)
-                    ->zoom(14)
-                    ->minZoom(2)
-                    ->maxZoom(19)
-                    ->tilesUrl("https://tile.openstreetmap.de/{z}/{x}/{y}.png")
-                    ->detectRetina(true)
-
-                    // Marker Configuration
-                    ->showMarker(true)
-
-                    // Controls
-                    ->showFullscreenControl(true)
-                    ->showZoomControl(true)
-
-                    // Location Features
-                    ->liveLocation(true, true, 5000)
-                    ->showMyLocationButton(true)
-                    ->rangeSelectField('distance')
-
-                    // Extra Customization
-                    ->extraStyles([
-                        'min-height: 50vh',
-                        'border-radius: 1rem'
                     ])
-                    ->extraControl(['customControl' => true])
-                    ->extraTileControl(['customTileOption' => 'value'])
-
-                    // State Management
-                    ->afterStateUpdated(function (Set $set, ?array $state): void {
-                        $set('latitude', $state['lat']);
-                        $set('longitude', $state['lng']);
-                    }),
-
-                    Group::make([
-                        RichEditor::make('location_description')
-                        ->label('Location Description')
-                        ->maxLength(65535)
-                        ->toolbarButtons([
-                            'bold',
-                            'bulletList',
-                            'h2',
-                            'h3',
-                            'italic',
-                            'orderedList',
-                            'redo',
-                            'underline',
-                            'undo',
-                        ]),
-
-                        RichEditor::make('landmark')
-                        ->label('Landmark')
-                        ->maxLength(65535)
-                        ->toolbarButtons([
-                            'bold',
-                            'bulletList',
-                            'h2',
-                            'h3',
-                            'italic',
-                            'orderedList',
-                            'redo',
-                            'underline',
-                            'undo',
-                        ]),
-                    ])
-                    ->columns([
-                        'sm' => 1,
-                        'md' => 2,
-                        'lg' => 2
-
-                    ]),
-
 
                 ])
+                ->columnSpanFull()
+
+
             ]);
     }
 
@@ -139,7 +286,92 @@ class IncidentResource extends Resource
     {
         return $table
             ->columns([
-                //
+
+                ImageColumn::make('images.image_path')
+                ->label(__(''))
+                ->circular()
+                ->stacked()
+                ->limit(3)
+                ->limitedRemainingText(isSeparate: true)
+                ->wrap()
+                ->ring(3),
+
+                TextColumn::make('incident_number')
+                ->label('Incident #')
+                ->sortable()
+                ->searchable()
+                ->formatStateUsing(fn ($state) => strtoupper($state))
+                ->weight(FontWeight::Bold)
+                ->badge()
+                ->color('primary'),
+
+                TextColumn::make('type.inc_name')
+                ->label('Incident Type')
+                ->sortable()
+                ->searchable()
+                ->formatStateUsing(fn ($state) => ucwords($state))
+                ->weight(FontWeight::Bold),
+
+                TextColumn::make('status')
+                ->label('Status')
+                ->sortable()
+                ->searchable()
+                ->formatStateUsing(fn ($state) => ucwords($state))
+                ->weight(FontWeight::Bold)
+                ->badge()
+                ->color(function (string $state): string {
+                    return match ($state) {
+                        'reported' => 'warning',
+                        'verified' => 'info',
+                        'in_progress' => 'primary',
+                        'resolved' => 'success',
+                        'closed' => 'danger',
+                        default => 'secondary',
+                    };
+                })
+                ->icon(function (string $state): string {
+                    return match ($state) {
+                        'reported' => 'heroicon-s-flag',
+                        'verified' => 'heroicon-s-check-circle',
+                        'in_progress' => 'heroicon-s-cog',
+                        'resolved' => 'heroicon-s-check-circle',
+                        'closed' => 'heroicon-s-x-circle',
+                        default => 'heroicon-s-clock',
+                    };
+                }),
+
+                TextColumn::make('priority')
+                ->label('Priority')
+                ->sortable()
+                ->searchable()
+                ->formatStateUsing(fn ($state) => ucwords($state))
+                ->weight(FontWeight::Bold)
+                ->badge()
+                ->color(function (string $state): string {
+                    return match ($state) {
+                        'low' => 'success',
+                        'medium' => 'warning',
+                        'high' => 'danger',
+                        'critical' => 'danger',
+                    };
+                })
+                ->icon(function (string $state): string {
+                    return match ($state) {
+                        'low' => 'heroicon-o-arrow-trending-down',
+                        'medium' => 'heroicon-o-arrows-right-left',
+                        'high' => 'heroicon-o-arrow-trending-up',
+                        'critical' => 'heroicon-o-arrow-trending-up',
+                    };
+                }),
+
+                TextColumn::make('created_at')
+                ->label('Reported At')
+                ->sortable()
+                ->searchable()
+                ->date()
+                ->since()
+
+
             ])
             ->filters([
                 //

@@ -12,9 +12,8 @@ class IncidentType extends Model
 
     protected $fillable = [
         'inc_name',
-        'inc_description',
-        'inc_severity_scale',
-        'inc_required_resources',
+        'inc_slug',
+        'inc_description'
     ];
 
     protected $casts = [

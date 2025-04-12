@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Incident extends Model
 {
@@ -20,7 +21,6 @@ class Incident extends Model
         'status',
         'verification_date',
         'priority',
-        'metadata',
     ];
 
     protected $casts = [
@@ -48,9 +48,9 @@ class Incident extends Model
         return $this->hasMany(IncidentImage::class);
     }
 
-    public function locations() : HasMany
+    public function location() : HasOne
     {
-        return $this->hasMany(IncidentLocation::class);
+        return $this->hasOne(IncidentLocation::class);
     }
 
     public function responses() : HasMany
