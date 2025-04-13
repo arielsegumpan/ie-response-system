@@ -261,17 +261,25 @@ class IncidentResource extends Resource
 
                         // State Management
                         ->afterStateUpdated(function (Set $set, ?array $state): void {
-                            $set('latitude', $state['lat']);
-                            $set('longitude', $state['lng']);
-                            $set('geojson', json_encode($state['geojson']));
+                            if ($state && isset($state['lat']) && isset($state['lng'])) {
+                                $set('latitude', $state['lat']);
+                                $set('longitude', $state['lng']);
+
+                                // Check if geojson key exists before trying to access it
+                                if (isset($state['geojson'])) {
+                                    $set('geojson', json_encode($state['geojson']));
+                                }
+                            }
                         })
 
                         ->afterStateHydrated(function ($state, $record, Set $set): void {
-                            $set('location', [
-                                'lat' => $record->latitude,
-                                'lng' => $record->longitude,
-                                'geojson' => json_decode(strip_tags($record->description))
-                            ]);
+                            if ($record && isset($record->latitude) && isset($record->longitude)) {
+                                $set('location', [
+                                    'lat' => $record->latitude,
+                                    'lng' => $record->longitude,
+                                    'geojson' => $record->geojson ? json_decode(strip_tags($record->geojson)) : null
+                                ]);
+                            }
                         }),
 
 
