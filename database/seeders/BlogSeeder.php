@@ -15,15 +15,6 @@ class BlogSeeder extends Seeder
      */
     public function run(): void
     {
-        //  // Ensure there are at least 5 tags and 3 categories
-        //  if (Tag::count() < 5) {
-        //     Tag::factory()->count(10)->create(); // if you don't have one, create a factory for Tag
-        // }
-
-        // if (Category::count() < 3) {
-        //     Category::factory()->count(5)->create(); // if you don't have one, create a factory for Category
-        // }
-
         $tags = Tag::pluck('id')->toArray();
         $categories = Category::pluck('id')->toArray();
 
@@ -33,7 +24,13 @@ class BlogSeeder extends Seeder
                 "user_id" => 1,
                 "title" => "Tricycle Driver Killed, Passenger Injured in Victorias Collision",
                 "slug" => "tricycle-driver-killed-passenger-injured-victorias-collision",
-                "content" => "On August 20, 2023, a tragic accident occurred in Barangay 13, Victorias City, when a tricycle was rear-ended by a Ceres bus along the national highway. The tricycle, driven by 25-year-old Elf Sanipa from Barangay 10, malfunctioned and swerved into the opposite lane, leading to the collision.\n\nThe impact resulted in the immediate death of Sanipa, while his passenger, 29-year-old Jenalyn Navarro from Barangay Vista Alegre, Bacolod City, sustained injuries. Navarro was promptly transported to Corazon Locsin Montelibano Memorial Regional Hospital in Bacolod City for medical treatment.\n\nAuthorities have impounded both vehicles involved for proper investigation. The bus driver, 49-year-old Lemuel Fajardo from Barangay Bug-ang, Toboso town, was temporarily detained at the Victorias Police Station pending further inquiries.",
+                "content" => "On August 20, 2023, a tragic accident occurred in Barangay 13, Victorias City, when a tricycle was rear-ended by a Ceres bus along the national highway. The tricycle, driven by 25-year-old Elf Sanipa from Barangay 10, malfunctioned and swerved into the opposite lane, leading to the collision.​
+
+                The impact resulted in the immediate death of Sanipa, while his passenger, 29-year-old Jenalyn Navarro from Barangay Vista Alegre, Bacolod City, sustained injuries. Navarro was promptly transported to Corazon Locsin Montelibano Memorial Regional Hospital in Bacolod City for medical treatment.​
+
+                Authorities have impounded both vehicles involved for proper investigation. The bus driver, 49-year-old Lemuel Fajardo from Barangay Bug-ang, Toboso town, was temporarily detained at the Victorias Police Station pending further inquiries.​
+
+                The Victorias City Police Department urges all motorists to exercise caution and ensure their vehicles are in good working condition to prevent such accidents. They also remind drivers to adhere to traffic regulations to ensure the safety of all road users.",
                 "featured_img" => "https://via.placeholder.com/640x480.png?text=Accident",
                 "status" => "published",
                 "is_featured" => false,

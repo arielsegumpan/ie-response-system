@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('status', ['reported','verified','in_progress','resolved','closed'])->default('reported');
             $table->timestamp('verification_date')->useCurrent();
             $table->enum('priority', ['low', 'medium', 'high', 'critical'])->default('medium');
+            $table->json('involved')->nullable();
             $table->timestamps();
         });
     }

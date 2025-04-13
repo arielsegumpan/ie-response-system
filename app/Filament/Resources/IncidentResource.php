@@ -266,16 +266,13 @@ class IncidentResource extends Resource
                             $set('geojson', json_encode($state['geojson']));
                         })
 
-                        // ->afterStateHydrated(function ($state, $record, Set $set): void {
-                        //     $set('location', [
-                        //         'lat' => $record->latitude,
-                        //         'lng' => $record->longitude,
-                        //         'geojson' => json_decode(strip_tags($record->description))
-                        //     ]);
-                        // })
-
-
-                        ,
+                        ->afterStateHydrated(function ($state, $record, Set $set): void {
+                            $set('location', [
+                                'lat' => $record->latitude,
+                                'lng' => $record->longitude,
+                                'geojson' => json_decode(strip_tags($record->description))
+                            ]);
+                        }),
 
 
                         Group::make([

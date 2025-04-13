@@ -3,10 +3,11 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Blog;
-use App\Models\Incident;
 use Livewire\Component;
+use App\Models\Incident;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\Storage;
 
 class IndexPage extends Component
 {
@@ -28,11 +29,23 @@ class IndexPage extends Component
 
     public function mount()
     {
-        $this->incidents = Incident::with(['type', 'location'])
+        $this->incidents = Incident::with([
+            'type',
+            'location',
+            'images' => function ($query) {
+                $query->take(3);
+            }
+        ])
         ->orderBy('created_at', 'desc')
         ->get()
         ->transform(function ($incident) {
             $incident->formatted_created_at = $incident->created_at->diffForHumans();
+
+            $incident->images->transform(function ($image) {
+                $image->image_url = Storage::url($image->image_path);
+                return $image;
+            });
+
             return $incident;
         });
     }
@@ -41,6 +54,7 @@ class IndexPage extends Component
     #[Title('Home')]
     public function render()
     {
+
         return view('livewire.pages.index-page',[
             'featuredPosts' => $this->getFeaturedPosts(),
             'incidents' => $this->incidents
