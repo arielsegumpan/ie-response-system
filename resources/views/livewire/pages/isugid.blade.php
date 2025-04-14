@@ -11,6 +11,14 @@
             </p>
         </div>
 
+        <div class="pt-10 lg:pt-14">
+            <!-- Features -->
+            <div class="max-w-6xl mx-auto">
+                <div id="hs-pin-leaflet" class="h-[430px] hs-leaflet z-10 rounded-[1rem] ring-1 ring-neutral-600 dark:ring-neutral-500"></div>
+            </div>
+            <!-- End Features -->
+        </div>
+
         <div class="mt-12 grid items-center lg:grid-cols-2 gap-6 lg:gap-16">
             <!-- Card -->
             <div class="flex flex-col border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 dark:border-neutral-700">
@@ -55,79 +63,68 @@
                 <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">Send inquiry</button>
                 </div>
 
-                <div class="mt-3 text-center">
-                <p class="text-sm text-gray-500 dark:text-neutral-500">
-                    We'll get back to you in 1-2 business days.
-                </p>
-                </div>
+
             </form>
             </div>
             <!-- End Card -->
 
             <div class="divide-y divide-gray-200 dark:divide-neutral-800">
-            <!-- Icon Block -->
-            <div class="flex gap-x-7 py-6">
-                <svg class="shrink-0 size-6 mt-1.5 text-gray-800 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-                <div class="grow">
-                <h3 class="font-semibold text-gray-800 dark:text-neutral-200">Knowledgebase</h3>
-                <p class="mt-1 text-sm text-gray-500 dark:text-neutral-500">We're here to help with any questions or code.</p>
-                <a class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">
-                    Contact support
-                    <svg class="shrink-0 size-2.5 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.975821 6.92249C0.43689 6.92249 -3.50468e-07 7.34222 -3.27835e-07 7.85999C-3.05203e-07 8.37775 0.43689 8.79749 0.975821 8.79749L12.7694 8.79748L7.60447 13.7596C7.22339 14.1257 7.22339 14.7193 7.60447 15.0854C7.98555 15.4515 8.60341 15.4515 8.98449 15.0854L15.6427 8.68862C16.1191 8.23098 16.1191 7.48899 15.6427 7.03134L8.98449 0.634573C8.60341 0.268455 7.98555 0.268456 7.60447 0.634573C7.22339 1.00069 7.22339 1.59428 7.60447 1.9604L12.7694 6.92248L0.975821 6.92249Z" fill="currentColor"/>
-                    </svg>
-                </a>
-                </div>
-            </div>
-            <!-- End Icon Block -->
 
-            <!-- Icon Block -->
-            <div class="flex gap-x-7 py-6">
-                <svg class="shrink-0 size-6 mt-1.5 text-gray-800 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg>
-                <div class="grow">
-                <h3 class="font-semibold text-gray-800 dark:text-neutral-200">FAQ</h3>
-                <p class="mt-1 text-sm text-gray-500 dark:text-neutral-500">Search our FAQ for answers to anything you might ask.</p>
-                <a class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">
-                    Visit FAQ
-                    <svg class="shrink-0 size-2.5 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.975821 6.92249C0.43689 6.92249 -3.50468e-07 7.34222 -3.27835e-07 7.85999C-3.05203e-07 8.37775 0.43689 8.79749 0.975821 8.79749L12.7694 8.79748L7.60447 13.7596C7.22339 14.1257 7.22339 14.7193 7.60447 15.0854C7.98555 15.4515 8.60341 15.4515 8.98449 15.0854L15.6427 8.68862C16.1191 8.23098 16.1191 7.48899 15.6427 7.03134L8.98449 0.634573C8.60341 0.268455 7.98555 0.268456 7.60447 0.634573C7.22339 1.00069 7.22339 1.59428 7.60447 1.9604L12.7694 6.92248L0.975821 6.92249Z" fill="currentColor"/>
-                    </svg>
-                </a>
-                </div>
-            </div>
-            <!-- End Icon Block -->
-
-            <!-- Icon Block -->
-            <div class=" flex gap-x-7 py-6">
-                <svg class="shrink-0 size-6 mt-1.5 text-gray-800 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
-                <div class="grow">
-                <h3 class="font-semibold text-gray-800 dark:text-neutral-200">Developer APIs</h3>
-                <p class="mt-1 text-sm text-gray-500 dark:text-neutral-500">Check out our development quickstart guide.</p>
-                <a class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">
-                    Contact sales
-                    <svg class="shrink-0 size-2.5 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.975821 6.92249C0.43689 6.92249 -3.50468e-07 7.34222 -3.27835e-07 7.85999C-3.05203e-07 8.37775 0.43689 8.79749 0.975821 8.79749L12.7694 8.79748L7.60447 13.7596C7.22339 14.1257 7.22339 14.7193 7.60447 15.0854C7.98555 15.4515 8.60341 15.4515 8.98449 15.0854L15.6427 8.68862C16.1191 8.23098 16.1191 7.48899 15.6427 7.03134L8.98449 0.634573C8.60341 0.268455 7.98555 0.268456 7.60447 0.634573C7.22339 1.00069 7.22339 1.59428 7.60447 1.9604L12.7694 6.92248L0.975821 6.92249Z" fill="currentColor"/>
-                    </svg>
-                </a>
-                </div>
-            </div>
-            <!-- End Icon Block -->
-
-            <!-- Icon Block -->
-            <div class=" flex gap-x-7 py-6">
-                <svg class="shrink-0 size-6 mt-1.5 text-gray-800 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
-                <div class="grow">
-                <h3 class="font-semibold text-gray-800 dark:text-neutral-200">Contact us by email</h3>
-                <p class="mt-1 text-sm text-gray-500 dark:text-neutral-500">If you wish to write us an email instead please use</p>
-                <a class="mt-2 inline-flex items-center gap-x-2 text-sm font-medium text-gray-600 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200" href="#">
-                    example@site.com
-                </a>
-                </div>
-            </div>
-            <!-- End Icon Block -->
             </div>
         </div>
         </div>
     </div>
     <!-- End Contact Us -->
+
+    @push('scripts')
+        <script>
+            window.addEventListener('load', () => {
+                (function () {
+
+                    // var littleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
+                    //     denver    = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
+                    //     aurora    = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
+                    //     golden    = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
+
+                    const map = L.map('hs-pin-leaflet', {
+                        center: [10.885, 123.075],
+                        zoom: 13,
+                        // maxBounds: [
+                        //     [10.83, 122.98], // Slightly more southwest
+                        //     [10.94, 123.17]  // Slightly more northeast
+                        // ],
+                        // maxBoundsViscosity: 0.4
+                    });
+
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        minZoom: 2,
+                        attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
+
+                    // Define a variable to hold the single marker
+                    let singleMarker;
+
+                    // Add marker on click, and update it if it already exists
+                    map.on('click', function (e) {
+                        const { lat, lng } = e.latlng;
+
+                        if (singleMarker) {
+                            // If marker exists, just move and update the popup
+                            singleMarker.setLatLng([lat, lng])
+                                .setPopupContent(`You clicked at:<br><strong>${lat.toFixed(5)}, ${lng.toFixed(5)}</strong>`)
+                                .openPopup();
+                        } else {
+                            // If no marker yet, create a new one
+                            singleMarker = L.marker([lat, lng])
+                                .addTo(map)
+                                .bindPopup(`You clicked at:<br><strong>${lat.toFixed(5)}, ${lng.toFixed(5)}</strong>`)
+                                .openPopup();
+                        }
+                    });
+
+                })();
+            });
+        </script>
+    @endpush
 </div>

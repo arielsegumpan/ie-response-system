@@ -13,10 +13,10 @@
             <!-- Title -->
             <div class="space-y-2 md:space-y-4">
                 <h2 class="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200">
-                We tackle the challenges start-ups face
+                Lorem ipsum, dolor sit amet consectetur adipisicing
                 </h2>
                 <p class="text-gray-500 dark:text-neutral-500">
-                Besides working with start-up enterprises as a partner for digitalization, we have built enterprise products for common pain points that we have encountered in various products and projects.
+               Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur ullam alias commodi error iste similique quia enim excepturi ipsum pariatur?
                 </p>
             </div>
             <!-- End Title -->
@@ -29,7 +29,7 @@
                 </span>
                 <div class="grow">
                     <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
-                    <span class="font-bold">Easy & fast</span> designing
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </span>
                 </div>
                 </li>
@@ -40,7 +40,7 @@
                 </span>
                 <div class="grow">
                     <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
-                    Powerful <span class="font-bold">features</span>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </span>
                 </div>
                 </li>
@@ -51,7 +51,7 @@
                 </span>
                 <div class="grow">
                     <span class="text-sm sm:text-base text-gray-500 dark:text-neutral-500">
-                    User Experience Design
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </span>
                 </div>
                 </li>
@@ -70,10 +70,10 @@
         <!-- Title -->
         <div class="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
         <h2 class="text-3xl lg:text-4xl text-gray-800 font-bold dark:text-neutral-200">
-            Explore tools
+           Lorem, ipsum dolor
         </h2>
         <p class="mt-3 text-gray-800 dark:text-neutral-200">
-            The powerful and flexible theme for all kinds of businesses.
+           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
         </div>
         <!-- End Title -->
@@ -85,7 +85,7 @@
             <svg class="shrink-0 size-7 md:size-9 mx-auto text-gray-800 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="10" height="14" x="3" y="8" rx="2"/><path d="M5 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-2.4"/><path d="M8 18h.01"/></svg>
             <div class="mt-2 sm:mt-6">
             <h3 class="sm:text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                Responsive
+                Lorem, ipsum dolor
             </h3>
             </div>
         </div>
@@ -96,7 +96,7 @@
             <svg class="shrink-0 size-7 md:size-9 mx-auto text-gray-800 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
             <div class="mt-2 sm:mt-6">
             <h3 class="sm:text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                Customizable
+                Lorem, ipsum dolor
             </h3>
             </div>
         </div>
@@ -107,7 +107,7 @@
             <svg class="shrink-0 size-7 md:size-9 mx-auto text-gray-800 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg>
             <div class="mt-2 sm:mt-6">
             <h3 class="sm:text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                24/7 Support
+                Lorem, ipsum dolor
             </h3>
             </div>
         </div>

@@ -87,7 +87,7 @@
                                 {{ $post->title }}
                             </h3>
                             <p class="mt-2 text-white/80">
-                                {{ $post->content }}
+                                {{ $post->strip_content }}
                             </p>
                         </div>
                     </div>

@@ -45,6 +45,7 @@ class CategoryTagSeeder extends Seeder
         $tags = [
             ['tag_name' => 'Traffic', 'tag_slug' => 'traffic', 'tag_desc' => 'Topics related to traffic and road conditions.'],
             ['tag_name' => 'Accident', 'tag_slug' => 'accident', 'tag_desc' => 'Articles involving vehicular or other types of accidents.'],
+            ['tag_name' => 'Ceres Bus', 'tag_slug' => 'ceres-bus', 'tag_desc' => 'News specific to the Ceres Bus.'],
             ['tag_name' => 'Negros Occidental', 'tag_slug' => 'negros-occidental', 'tag_desc' => 'News specific to the province of Negros Occidental.'],
             ['tag_name' => 'Road Safety', 'tag_slug' => 'road-safety', 'tag_desc' => 'Tips and discussions on ensuring road safety.'],
             ['tag_name' => 'Collision', 'tag_slug' => 'collision', 'tag_desc' => 'Incidents involving vehicle collisions.'],

@@ -23,7 +23,7 @@ class Blog extends Component
             ->orderBy('created_at', 'desc')
             ->paginate(6)
             ->through(function ($post) {
-                $post->content = Str::limit(strip_tags($post->content), 70);
+                $post->strip_content = Str::limit(strip_tags($post->content), 70);
                 return $post;
             });
     }

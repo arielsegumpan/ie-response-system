@@ -17,6 +17,9 @@ class Incident extends Model
         'incident_type_id',
         'verified_by',
         'incident_number',
+        'involved',
+        'injuries_damage',
+        'recommendations',
         'description',
         'status',
         'verification_date',
@@ -24,8 +27,8 @@ class Incident extends Model
     ];
 
     protected $casts = [
-        'metadata' => 'array',
         'verification_date' => 'datetime',
+        'involved' => 'array',
     ];
 
     public function type() : BelongsTo

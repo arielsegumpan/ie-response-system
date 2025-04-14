@@ -261,7 +261,7 @@
 
                     return `
                     <div>
-                        <h3 class="text-xl font-bold text-gray-800">${inc_name}</h3>
+                        <h3 class="text-xl font-bold text-red-600">${inc_name}</h3>
                         <div class="text-sm text-gray-500 dark:text-neutral-500">${created_at}</div>
                         <div class="flex flex-wrap gap-1 mt-2">
                             ${ imagesHtml }
