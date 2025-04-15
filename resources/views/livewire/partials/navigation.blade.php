@@ -66,19 +66,34 @@
         <div id="hs-navbar-hcail" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow lg:block lg:w-auto lg:basis-auto lg:order-2 lg:col-span-6" aria-labelledby="hs-navbar-hcail-collapse">
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 lg:flex-row lg:justify-center lg:items-center lg:gap-y-0 lg:gap-x-10 lg:mt-0">
             <div>
-                <a class="relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white" href="{{ route('page.home') }}" aria-current="page">{{ __('Home') }}</a>
+                <a class="{{ request()->routeIs('page.home') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                    href="{{ route('page.home') }}">
+                    {{ __('Home') }}
+                 </a>
             </div>
             <div>
-                <a class="inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300" href="{{ route('page.isugid') }}">{{ __('Isugid') }}</a>
+                <a class="{{ request()->routeIs('page.isugid') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                    href="{{ route('page.isugid') }}">
+                    {{ __('Isugid') }}
+                 </a>
             </div>
             <div>
-                <a class="inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300" href="{{ route('page.blog') }}">{{ __('Blog') }}</a>
+                <a class="{{ request()->routeIs('page.blog', 'page.blog.show', 'page.blog.category', 'page.blog.tag') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                    href="{{ route('page.blog') }}">
+                    {{ __('Blog') }}
+                 </a>
             </div>
             <div>
-                <a class="inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300" href="{{ route('page.about') }}">{{ __('About') }}</a>
+                <a class="{{ request()->routeIs('page.about') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                    href="{{ route('page.about') }}">
+                    {{ __('About') }}
+                 </a>
             </div>
             <div>
-                <a class="inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300" href="{{ route('page.contact') }}">{{ __('Contact') }}</a>
+                <a class="{{ request()->routeIs('page.contact') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                    href="{{ route('page.contact') }}">
+                    {{ __('Contact') }}
+                 </a>
             </div>
             </div>
         </div>

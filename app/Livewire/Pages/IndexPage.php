@@ -55,6 +55,7 @@ class IndexPage extends Component
     public function render()
     {
 
+        // dd($this->incidents);
         return view('livewire.pages.index-page',[
             'featuredPosts' => $this->getFeaturedPosts(),
             'incidents' => $this->incidents

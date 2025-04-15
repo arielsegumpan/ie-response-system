@@ -75,7 +75,7 @@ class IncidentResource extends Resource
                             ->unique(Incident::class, 'incident_number', ignoreRecord: true)
                             ->maxLength(255)
                             ->disabled()
-                            ->default('INC#' . '-' . strtoupper(Str::random(6)) . '-' . rand(500, 9999))
+                            ->default('INC-NUM' . '-' . strtoupper(Str::random(6)) . '-' . rand(500, 9999))
                             ->dehydrated(),
 
                             Select::make('incident_type_id')
@@ -352,7 +352,7 @@ class IncidentResource extends Resource
                     return match ($state) {
                         'reported' => 'warning',
                         'verified' => 'info',
-                        'in_progress' => 'primary',
+                        'in_progress' => 'warning',
                         'resolved' => 'success',
                         'closed' => 'danger',
                         default => 'secondary',
@@ -362,12 +362,13 @@ class IncidentResource extends Resource
                     return match ($state) {
                         'reported' => 'heroicon-s-flag',
                         'verified' => 'heroicon-s-check-circle',
-                        'in_progress' => 'heroicon-s-cog',
+                        'in_progress' => 'heroicon-s-arrow-path',
                         'resolved' => 'heroicon-s-check-circle',
                         'closed' => 'heroicon-s-x-circle',
                         default => 'heroicon-s-clock',
                     };
-                }),
+                })
+                ->formatStateUsing(fn ($state) => Str::replace('_', ' ', ucwords($state))),
 
                 TextColumn::make('priority')
                 ->label('Priority')
@@ -480,7 +481,7 @@ class IncidentResource extends Resource
                             return match ($state) {
                                 'reported' => 'warning',
                                 'verified' => 'info',
-                                'in_progress' => 'primary',
+                                'in_progress' => 'warning',
                                 'resolved' => 'success',
                                 'closed' => 'danger',
                                 default => 'secondary',
@@ -490,12 +491,13 @@ class IncidentResource extends Resource
                             return match ($state) {
                                 'reported' => 'heroicon-s-flag',
                                 'verified' => 'heroicon-s-check-circle',
-                                'in_progress' => 'heroicon-s-cog',
+                                'in_progress' => 'heroicon-s-arrow-path',
                                 'resolved' => 'heroicon-s-check-circle',
                                 'closed' => 'heroicon-s-x-circle',
                                 default => 'heroicon-s-clock',
                             };
-                        }),
+                        })
+                        ->formatStateUsing(fn ($state) => Str::replace('_', ' ', ucwords($state))),
 
                         TextEntry::make('priority')
                         ->label('Priority')
@@ -515,7 +517,7 @@ class IncidentResource extends Resource
                                 'low' => 'heroicon-o-arrow-trending-down',
                                 'medium' => 'heroicon-o-arrows-right-left',
                                 'high' => 'heroicon-o-arrow-trending-up',
-                                'critical' => 'heroicon-o-arrow-trending-up',
+                                'critical' => 'heroicon-o-exclamation-triangle',
                             };
                         }),
                     ])

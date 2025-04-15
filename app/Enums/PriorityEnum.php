@@ -20,7 +20,7 @@ enum PriorityEnum: string implements HasIcon, HasColor, HasLabel
             self::LOW => 'heroicon-o-arrow-trending-down',
             self::MEDIUM => 'heroicon-o-arrows-right-left',
             self::HIGH => 'heroicon-o-arrow-trending-up',
-            self::CRITICAL => 'heroicon-o-arrow-trending-up',
+            self::CRITICAL => 'heroicon-o-exclamation-triangle',
         };
     }
 

@@ -249,35 +249,61 @@
                     attribution: '© OpenStreetMap contributors'
                 }).addTo(map);
 
-                function createPopupContent(inc_name, created_at, imageArray) {
+                function createPopupContent(inc_name, incident_number, created_at, status, imageArray) {
                     let imagesHtml = '';
                     if (Array.isArray(imageArray)) {
                         imagesHtml = imageArray.map(img => {
-                            return `<img class="inline-block size-8 rounded-lg border-1 border-red-800 object-cover" src="${img.image_url}" alt="Incident Image">`;
+                            return `<img class="inline-block size-8 rounded-lg object-cover ring-2 mt-2 ring-white dark:ring-nuetral-400" src="${img.image_url}" alt="Incident Image">`;
+
                         }).join('');
-
-                        console.log(imagesHtml);
                     }
-
                     return `
-                    <div>
-                        <h3 class="text-xl font-bold text-red-600">${inc_name}</h3>
-                        <div class="text-sm text-gray-500 dark:text-neutral-500">${created_at}</div>
-                        <div class="flex flex-wrap gap-1 mt-2">
-                            ${ imagesHtml }
+                    <div class="max-w-[20rem]">
+                        <a href="/incidents/${incident_number}">
+                            <h3 class="text-lg font-bold text-red-600">
+                                ${inc_name.toUpperCase()}
+                            </h3>
+                        </a>
+                        <div class="text-sm text-gray-500 dark:text-neutral-500">
+                             ${created_at}
+                        </div>
+                        <div class="mt-1">
+                           <small>
+                             <span class="inline-flex items-center gap-x-1.5 px-3 rounded-md text-xs font-medium border ${getStatusClass(status)}">${status.toUpperCase().replace('_', ' ')}</span>
+                            </small>
+                        </div>
+                        <div class="flex -space-x-2">
+                            ${ imagesHtml}
                         </div>
                     </div>
                     `;
                 }
 
+                function getStatusClass(status) {
+                    switch (status.toLowerCase()) {
+                        case 'resolved':
+                            return 'border-green-500 text-green-500';
+                        case 'pending':
+                            return 'border-yellow-500 text-yellow-500';
+                        case 'in_progress':
+                            return 'border-yellow-500 text-yellow-500';
+                        default:
+                            return 'border-red-500 text-red-500';
+                    }
+                }
+
+
                 // Add dynamic markers
                 if (window.incidents) {
+
                     window.incidents.forEach((incident) => {
                         if (incident.location.latitude && incident.location.longitude) {
                             L.marker([incident.location.latitude, incident.location.longitude])
                                 .bindPopup(createPopupContent(
                                     incident.type.inc_name,
+                                    incident.incident_number,
                                     incident.formatted_created_at,
+                                    incident.status,
                                     incident.images
                                 ))
                                 .addTo(map);

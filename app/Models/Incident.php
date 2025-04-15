@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-
+use Illuminate\Support\Str;
 class Incident extends Model
 {
     use HasFactory;
@@ -60,4 +61,24 @@ class Incident extends Model
     {
         return $this->hasMany(Response::class);
     }
+
+
+    public function formatForView(): void
+    {
+        if ($this->type) {
+            $this->type->inc_name = Str::ucwords(preg_replace('/[_-]+/', ' ', $this->type->inc_name));
+        }
+
+        $this->status = ucwords(preg_replace('/[_-]+/', ' ', $this->status));
+
+        $this->priority = Str::upper(preg_replace('/[_-]+/', ' ', $this->priority));
+
+        $this->formatted_created_at = $this->created_at->diffForHumans();
+
+        $this->images->transform(function ($image) {
+            $image->image_url = Storage::url($image->image_path);
+            return $image;
+        });
+    }
+
 }
