@@ -306,7 +306,8 @@
                                     incident.status,
                                     incident.images
                                 ))
-                                .addTo(map);
+                                .addTo(map)
+                                .openPopup();
                         }
                     });
                 }
