@@ -41,7 +41,7 @@
                 <div class="mt-5">
                     <a class="inline-flex items-center gap-x-1.5 text-red-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-red-500" href="{{ route('page.blog.show', $featuredPost->slug) }}">
                         {{ __('Read more') }}
-                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                        <svg class="shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
                     </a>
                 </div>
             </div>

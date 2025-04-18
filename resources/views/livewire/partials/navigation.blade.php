@@ -6,7 +6,7 @@
             <!-- Logo -->
             <a class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="{{ route('page.home') }}" aria-label="ie-response">
 
-                <img class="w-12 h-auto" src="{{ asset('imgs/ie-logo.png') }}" alt="Logo" />
+                <img class="w-12 h-auto" src="{{ asset('imgs/ie-logo.png') }}" alt="{{ config('app.name') }}" />
 
             </a>
             <!-- End Logo -->
@@ -49,7 +49,7 @@
                 {{ __('Sign in') }}
             </a>
 
-            <a href="{{ route('filament.dashboard.auth.register') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-red-400 text-black hover:bg-red-500 focus:outline-hidden focus:bg-red-500 transition disabled:opacity-50 disabled:pointer-events-none">
+            <a href="{{ route('filament.dashboard.auth.register') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-red-600 text-white hover:bg-red-500 focus:outline-hidden focus:bg-red-600 transition disabled:opacity-50 disabled:pointer-events-none">
                 {{ __('Sign up') }}
             </a>
 
@@ -66,31 +66,37 @@
         <div id="hs-navbar-hcail" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow lg:block lg:w-auto lg:basis-auto lg:order-2 lg:col-span-6" aria-labelledby="hs-navbar-hcail-collapse">
             <div class="flex flex-col gap-y-4 gap-x-0 mt-5 lg:flex-row lg:justify-center lg:items-center lg:gap-y-0 lg:gap-x-10 lg:mt-0">
             <div>
-                <a class="{{ request()->routeIs('page.home') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                <a class="{{ request()->routeIs('page.home') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-600 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
                     href="{{ route('page.home') }}">
                     {{ __('Home') }}
                  </a>
             </div>
             <div>
-                <a class="{{ request()->routeIs('page.isugid') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                <a class="{{ request()->routeIs('page.volunteer') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-600 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                    href="{{ route('page.volunteer') }}">
+                    {{ __('Volunteer') }}
+                 </a>
+            </div>
+            <div>
+                <a class="{{ request()->routeIs('page.isugid') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-600 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
                     href="{{ route('page.isugid') }}">
                     {{ __('Isugid') }}
                  </a>
             </div>
             <div>
-                <a class="{{ request()->routeIs('page.blog', 'page.blog.show', 'page.blog.category', 'page.blog.tag') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                <a class="{{ request()->routeIs('page.blog', 'page.blog.show', 'page.blog.category', 'page.blog.tag') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-600 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
                     href="{{ route('page.blog') }}">
                     {{ __('Blog') }}
                  </a>
             </div>
             <div>
-                <a class="{{ request()->routeIs('page.about') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                <a class="{{ request()->routeIs('page.about') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-600 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
                     href="{{ route('page.about') }}">
                     {{ __('About') }}
                  </a>
             </div>
             <div>
-                <a class="{{ request()->routeIs('page.contact') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-400 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                <a class="{{ request()->routeIs('page.contact') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-600 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
                     href="{{ route('page.contact') }}">
                     {{ __('Contact') }}
                  </a>

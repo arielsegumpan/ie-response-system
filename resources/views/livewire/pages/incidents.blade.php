@@ -5,13 +5,23 @@
         <div class="sm:w-11/12 lg:w-3/4 mx-auto">
         <!-- Card -->
         <div class="flex flex-col p-4 sm:p-10 bg-white shadow-md rounded-xl dark:bg-neutral-800">
+
+            <div class="flex flex-row justify-between items-center align-middle w-full">
+                <h1 class=" mb-3
+                mb-2 text-2xl md:text-3xl font-semibold
+                py-1 px-5 inline-flex items-start bg-red-100 text-red-800 rounded-full dark:bg-red-500/10 dark:text-red-500
+                ">{{ $incident->incident_number }}</h1>
+
+                <a class="inline-flex flex-row items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline dark:text-red-500" href="{{ route('page.home') }}">
+                    <svg class="shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"><path d="m15 18-6-6 6-6"/></svg>
+                    {{ __('Back to Home') }}
+                </a>
+            </div>
+
+
             <!-- Grid -->
             <div class="flex flex-col md:flex-row md:inline-flex w-full gap-x-5 gap-y-5 md:gap-y-0">
                 <div>
-                    <h1 class=" mb-3
-                    mb-2 text-2xl md:text-3xl font-semibold
-                    py-1 px-5 inline-flex items-start bg-red-100 text-red-800 rounded-full dark:bg-red-500/10 dark:text-red-500
-                    ">{{ $incident->incident_number }}</h1>
                     <div id="hs-pin-leaflet" class="h-70 md:h-60 lg:h-100 hs-leaflet z-10 md:w-[250px] lg:w-[500px] rounded-[1rem] ring-1 ring-neutral-600 dark:ring-neutral-500"></div>
                 </div>
             <!-- Col -->

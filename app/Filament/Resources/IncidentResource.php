@@ -164,6 +164,7 @@ class IncidentResource extends Resource
                                 ->uploadingMessage('Uploading attachment...')
                                 ->maxSize(2048)
                                 ->maxFiles(5)
+                                ->directory('incident_images')
                             ])
                             ->addActionLabel('Add Attachment')
                             ->reorderable()

@@ -2,11 +2,12 @@
 
 use App\Livewire\Pages\Blog;
 use App\Livewire\Pages\About;
-use App\Livewire\Pages\Incidents;
 use App\Livewire\Pages\Isugid;
 use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\BlogShow;
+use App\Livewire\Pages\Incidents;
 use App\Livewire\Pages\IndexPage;
+use App\Livewire\Pages\Volunteer;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Pages\BlogExtras\TagPosts;
 use App\Livewire\Pages\BlogExtras\CategoryPosts;
@@ -25,3 +26,4 @@ Route::get('/contact', Contact::class)->name('page.contact');
 Route::get('/incidents/{incident_number}', Incidents::class)->name('page.incident.show');
 Route::get('/category/{slug}', CategoryPosts::class)->name('page.blog.category');
 Route::get('/tag/{slug}', TagPosts::class)->name('page.blog.tag');
+Route::get('/volunteer', Volunteer::class)->name('page.volunteer');

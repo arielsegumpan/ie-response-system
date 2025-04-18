@@ -6,7 +6,7 @@
         </div>
 
         <!-- Grid -->
-        <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12">
+        <div class="mt-5 lg:mt-16 grid lg:grid-cols-3 gap-8 l   g:gap-12">
         <div class="lg:col-span-1">
             <h2 class="font-bold text-2xl md:text-3xl text-gray-800 dark:text-neutral-200">
            Lorem ipsum, dolor sit amet consectetur adipisicing
@@ -82,124 +82,65 @@
     </div>
     <!-- End Features -->
 
-    <div class="flex flex-col">
-        <div class="-m-1.5 overflow-x-auto">
-          <div class="p-1.5 min-w-full inline-block align-middle">
-            <div class="border border-gray-200 rounded-lg divide-y divide-gray-200 dark:border-neutral-700 dark:divide-neutral-700">
-              <div class="py-3 px-4">
-                <div class="relative max-w-xs">
-                  <label class="sr-only">Search</label>
-                  <input type="text" name="hs-table-with-pagination-search" id="hs-table-with-pagination-search" class="py-1.5 sm:py-2 px-3 ps-9 block w-full border-gray-200 shadow-2xs rounded-lg sm:text-sm focus:z-10 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Search for items">
-                  <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
-                    <svg class="size-4 text-gray-400 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <path d="m21 21-4.3-4.3"></path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <div class="overflow-hidden">
-                <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                  <thead class="bg-gray-50 dark:bg-neutral-700">
-                    <tr>
-                      <th scope="col" class="py-3 px-4 pe-0">
-                        <div class="flex items-center h-5">
-                          <input id="hs-table-pagination-checkbox-all" type="checkbox" class="border-gray-200 rounded-sm text-red-600 focus:ring-red-500 dark:bg-neutral-700 dark:border-neutral-500 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800">
-                          <label for="hs-table-pagination-checkbox-all" class="sr-only">Checkbox</label>
-                        </div>
-                      </th>
-                      <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Name</th>
-                      <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Age</th>
-                      <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Address</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                    <tr>
-                      <td class="py-3 ps-4">
-                        <div class="flex items-center h-5">
-                          <input id="hs-table-pagination-checkbox-1" type="checkbox" class="border-gray-200 rounded-sm text-red-600 focus:ring-red-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800">
-                          <label for="hs-table-pagination-checkbox-1" class="sr-only">Checkbox</label>
-                        </div>
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">John Brown</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">45</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">New York No. 1 Lake Park</td>
+    <!-- Icon Blocks -->
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-6">
+        <!-- Card -->
+        <a class="group flex gap-y-6 size-full hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 rounded-lg p-5 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">
+            <svg class="shrink-0 size-8 text-gray-800 mt-0.5 me-6 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
 
-                    </tr>
-
-                    <tr>
-                      <td class="py-3 ps-4">
-                        <div class="flex items-center h-5">
-                          <input id="hs-table-pagination-checkbox-2" type="checkbox" class="border-gray-200 rounded-sm text-red-600 focus:ring-red-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800">
-                          <label for="hs-table-pagination-checkbox-2" class="sr-only">Checkbox</label>
-                        </div>
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Jim Green</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">27</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">London No. 1 Lake Park</td>
-
-                    </tr>
-
-                    <tr>
-                      <td class="py-3 ps-4">
-                        <div class="flex items-center h-5">
-                          <input id="hs-table-pagination-checkbox-3" type="checkbox" class="border-gray-200 rounded-sm text-red-600 focus:ring-red-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800">
-                          <label for="hs-table-pagination-checkbox-3" class="sr-only">Checkbox</label>
-                        </div>
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Joe Black</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">31</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">Sidney No. 1 Lake Park</td>
-
-                    </tr>
-
-                    <tr>
-                      <td class="py-3 ps-4">
-                        <div class="flex items-center h-5">
-                          <input id="hs-table-pagination-checkbox-4" type="checkbox" class="border-gray-200 rounded-sm text-red-600 focus:ring-red-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800">
-                          <label for="hs-table-pagination-checkbox-4" class="sr-only">Checkbox</label>
-                        </div>
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Edward King</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">16</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">LA No. 1 Lake Park</td>
-
-                    </tr>
-
-                    <tr>
-                      <td class="py-3 ps-4">
-                        <div class="flex items-center h-5">
-                          <input id="hs-table-pagination-checkbox-5" type="checkbox" class="border-gray-200 rounded-sm text-red-600 focus:ring-red-500 dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800">
-                          <label for="hs-table-pagination-checkbox-5" class="sr-only">Checkbox</label>
-                        </div>
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">Jim Red</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">45</td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">Melbourne No. 1 Lake Park</td>
-
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="py-1 px-4">
-                <nav class="flex items-center space-x-1" aria-label="Pagination">
-                  <button type="button" class="p-2.5 min-w-10 inline-flex justify-center items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" aria-label="Previous">
-                    <span aria-hidden="true">«</span>
-                    <span class="sr-only">Previous</span>
-                  </button>
-                  <button type="button" class="min-w-10 flex justify-center items-center text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:focus:bg-neutral-700 dark:hover:bg-neutral-700" aria-current="page">1</button>
-                  <button type="button" class="min-w-10 flex justify-center items-center text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:focus:bg-neutral-700 dark:hover:bg-neutral-700">2</button>
-                  <button type="button" class="min-w-10 flex justify-center items-center text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 py-2.5 text-sm rounded-full disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:focus:bg-neutral-700 dark:hover:bg-neutral-700">3</button>
-                  <button type="button" class="p-2.5 min-w-10 inline-flex justify-center items-center gap-x-2 text-sm rounded-full text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" aria-label="Next">
-                    <span class="sr-only">Next</span>
-                    <span aria-hidden="true">»</span>
-                  </button>
-                </nav>
-              </div>
+            <div>
+            <div>
+                <h3 class="block font-bold text-gray-800 dark:text-white">Build your portfolio</h3>
+                <p class="text-gray-600 dark:text-neutral-400">The simplest way to keep your portfolio always up-to-date.</p>
             </div>
-          </div>
+
+            <p class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                Learn more
+                <svg class="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </p>
+            </div>
+        </a>
+        <!-- End Card -->
+
+        <!-- Card -->
+        <a class="group flex gap-y-6 size-full hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 rounded-lg p-5 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">
+            <svg class="shrink-0 size-8 text-gray-800 mt-0.5 me-6 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></svg>
+
+            <div>
+            <div>
+                <h3 class="block font-bold text-gray-800 dark:text-white">Get freelance work</h3>
+                <p class="text-gray-600 dark:text-neutral-400">New design projects delivered to your inbox each morning.</p>
+            </div>
+
+            <p class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                Learn more
+                <svg class="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </p>
+            </div>
+        </a>
+        <!-- End Card -->
+
+        <!-- Card -->
+        <a class="group flex gap-y-6 size-full hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 rounded-lg p-5 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">
+            <svg class="shrink-0 size-8 text-gray-800 mt-0.5 me-6 dark:text-neutral-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg>
+
+            <div>
+            <div>
+                <h3 class="block font-bold text-gray-800 dark:text-white">Sell your goods</h3>
+                <p class="text-gray-600 dark:text-neutral-400">Get your goods in front of millions of potential customers with ease.</p>
+            </div>
+
+            <p class="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                Learn more
+                <svg class="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </p>
+            </div>
+        </a>
+        <!-- End Card -->
         </div>
     </div>
+    <!-- End Icon Blocks -->
 
 
     <!-- Card Blog -->
@@ -213,6 +154,7 @@
 
         <!-- Grid -->
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 lg:mb-14">
+            @if (count($featuredPosts) != 0)
             @foreach ($featuredPosts as $featPost)
             <!-- Card -->
             <a wire:key="blog-{{ $featPost->id }}" class="group flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-md focus:outline-hidden focus:shadow-md transition dark:bg-neutral-900 dark:border-neutral-800" href="{{ route('page.blog.show', $featPost->slug) }}">
@@ -230,12 +172,19 @@
             </a>
             <!-- End Card -->
             @endforeach
+            @else
+            <div class="col-span-1 col-span-4">
+                <h2 class="text-lg text-center font-bold text-gray-600 dark:text-neutral-400">{{ __('No Featured Posts') }}</h2>
+            </div>
+            @endif
     </div>
     <!-- End Card Blog -->
 
 
     @push('scripts')
         <script>
+            let mostRecentMarker = null;
+
             window.incidents = @json($incidents);
             window.addEventListener('load', () => {
                 const map = L.map('hs-pin-leaflet', {
@@ -254,28 +203,38 @@
                     if (Array.isArray(imageArray)) {
                         imagesHtml = imageArray.map(img => {
                             return `<img class="inline-block size-8 rounded-lg object-cover ring-2 mt-2 ring-white dark:ring-nuetral-400" src="${img.image_url}" alt="Incident Image">`;
-
                         }).join('');
                     }
                     return `
-                    <div class="max-w-[20rem]">
-                        <a href="/incidents/${incident_number}">
-                            <h3 class="text-lg font-bold text-red-600">
-                                ${inc_name.toUpperCase()}
-                            </h3>
-                        </a>
-                        <div class="text-sm text-gray-500 dark:text-neutral-500">
-                             ${created_at}
+                        <div class="max-w-[12rem]">
+                            <a href="/incidents/${incident_number}">
+                                <h3 class="text-lg font-bold text-red-600">
+                                    ${inc_name.toUpperCase()}
+                                </h3>
+                            </a>
+
+                            <div class="flex items-center justify-between items-center align-middle">
+
+
+
+                                <div>
+                                    <div class="text-sm text-gray-500 dark:text-neutral-500">
+                                        ${created_at}
+                                    </div>
+                                    <div class="mt-1">
+                                        <small>
+                                            <span class="inline-flex items-center gap-x-1.5 px-3 rounded-md text-xs font-medium border ${getStatusClass(status)}">
+                                                ${status.toUpperCase().replace('_', ' ')}
+                                            </span>
+                                        </small>
+                                    </div>
+                                </div>
+                                 <div class="flex -space-x-2">
+                                    ${imagesHtml}
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="mt-1">
-                           <small>
-                             <span class="inline-flex items-center gap-x-1.5 px-3 rounded-md text-xs font-medium border ${getStatusClass(status)}">${status.toUpperCase().replace('_', ' ')}</span>
-                            </small>
-                        </div>
-                        <div class="flex -space-x-2">
-                            ${ imagesHtml}
-                        </div>
-                    </div>
                     `;
                 }
 
@@ -284,7 +243,6 @@
                         case 'resolved':
                             return 'border-green-500 text-green-500';
                         case 'pending':
-                            return 'border-yellow-500 text-yellow-500';
                         case 'in_progress':
                             return 'border-yellow-500 text-yellow-500';
                         default:
@@ -292,13 +250,11 @@
                     }
                 }
 
-
                 // Add dynamic markers
                 if (window.incidents) {
-
-                    window.incidents.forEach((incident) => {
+                    window.incidents.forEach((incident, index) => {
                         if (incident.location.latitude && incident.location.longitude) {
-                            L.marker([incident.location.latitude, incident.location.longitude])
+                            const marker = L.marker([incident.location.latitude, incident.location.longitude])
                                 .bindPopup(createPopupContent(
                                     incident.type.inc_name,
                                     incident.incident_number,
@@ -306,13 +262,24 @@
                                     incident.status,
                                     incident.images
                                 ))
-                                .addTo(map)
-                                .openPopup();
+                                .addTo(map);
+
+                            // 🔥 Store the first marker as most recent
+                            if (index === 0) {
+                                mostRecentMarker = marker;
+                            }
                         }
                     });
+
+                    // 🔥 Open popup for the most recent incident
+                    if (mostRecentMarker) {
+                        mostRecentMarker.openPopup();
+                    }
                 }
             });
         </script>
+
+
     @endpush
 
 </div>

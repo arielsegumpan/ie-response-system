@@ -16,13 +16,8 @@ class Volunteer extends Model
         'user_id',
         'organization_id',
         'availability_status',
-        'certification_info',
         'verification_status',
         'notes',
-    ];
-
-    protected $casts = [
-        'certification_info' => 'array',
     ];
 
     public function user() : BelongsTo
@@ -40,5 +35,11 @@ class Volunteer extends Model
         return $this->hasMany(VolunteerSkill::class);
                     // ->withPivot(['proficiency_level', 'certification_date', 'expiration_date'])
                     // ->withTimestamps();
+    }
+
+
+    public function certifications() : HasMany
+    {
+        return $this->hasMany(VolunteerAppCertificate::class);
     }
 }

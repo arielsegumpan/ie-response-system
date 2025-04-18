@@ -30,7 +30,7 @@
                 <div class="py-8 lg:pe-8">
                     <div class="space-y-5 lg:space-y-8">
                         <a class="inline-flex flex-row items-center gap-x-1.5 text-sm text-gray-600 decoration-2 hover:underline dark:text-red-500" href="{{ route('page.blog') }}">
-                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"><path d="m15 18-6-6 6-6"/></svg>
+                        <svg class="shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"><path d="m15 18-6-6 6-6"/></svg>
                         {{ __('Back to Blog') }}
                         </a>
 

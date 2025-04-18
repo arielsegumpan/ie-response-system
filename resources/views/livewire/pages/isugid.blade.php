@@ -1,7 +1,42 @@
+
 <div>
     <!-- Contact Us -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div class="max-w-2xl lg:max-w-5xl mx-auto">
+            <!--Alert-->
+            @if (session()->has('success'))
+            <div
+
+            x-data="{ show: true }"
+            x-init="setTimeout(() => show = false, 3000)"
+            x-show="show"
+            x-transition="fade"
+
+            class="bg-teal-50 border-t-2 border-teal-500 rounded-lg p-4 dark:bg-teal-800/30 mb-6" role="alert" tabindex="-1" aria-labelledby="hs-bordered-success-style-label">
+                <div class="flex">
+                <div class="shrink-0">
+                    <!-- Icon -->
+                    <span class="inline-flex justify-center items-center size-8 rounded-full border-4 border-teal-100 bg-teal-200 text-teal-800 dark:border-teal-900 dark:bg-teal-800 dark:text-teal-400">
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                        <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                    </span>
+                    <!-- End Icon -->
+                </div>
+                <div class="ms-3">
+                    <h3 id="hs-bordered-success-style-label" class="text-gray-800 font-semibold dark:text-white">
+                        {{ __('Successfully Reported.') }}
+                    </h3>
+                    <p class="text-sm text-gray-700 dark:text-neutral-400">
+                        {{ session('success') }}
+                    </p>
+                </div>
+                </div>
+            </div>
+            @endif
+            <!-- End of Alert -->
+
             <div class="text-center">
                 <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
                 Isugid Mo!
@@ -13,205 +48,457 @@
 
             <div class="pt-10 lg:pt-14">
                 <!-- Features -->
-                <div class="max-w-6xl mx-auto">
-                    <div id="hs-pin-leaflet" class="h-[430px] hs-leaflet z-10 rounded-[1rem] ring-1 ring-neutral-600 dark:ring-neutral-500"></div>
+                <div class="max-w-6xl mx-auto" wire:ignore>
+                    <div id="hs-pin-leaflet" class="h-[350px] hs-leaflet z-10 rounded-[1rem] ring-1 ring-neutral-600 dark:ring-neutral-500"></div>
                 </div>
                 <!-- End Features -->
             </div>
 
-            <!-- Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 mt-10 lg:mt-14">
-                <div class="md:order-2 border-b border-neutral-800 pb-10 mb-10 md:border-b-0 md:pb-0 md:mb-0">
-                <form>
-                    <div class="space-y-4">
-                    <!-- Input -->
-                    <div class="relative">
-                        <input type="text" id="hs-tac-input-name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
-                        focus:pt-6
-                        focus:pb-2
-                        not-placeholder-shown:pt-6
-                        not-placeholder-shown:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="Name">
-                        <label for="hs-tac-input-name" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:text-xs
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-neutral-400
-                        peer-not-placeholder-shown:text-xs
-                        peer-not-placeholder-shown:-translate-y-1.5
-                        peer-not-placeholder-shown:text-neutral-400">Name</label>
-                    </div>
-                    <!-- End Input -->
+            <form wire:submit.prevent="submit">
 
-                    <!-- Input -->
-                    <div class="relative">
-                        <input type="email" id="hs-tac-input-email" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
-                        focus:pt-6
-                        focus:pb-2
-                        not-placeholder-shown:pt-6
-                        not-placeholder-shown:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="Email">
-                        <label for="hs-tac-input-email" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:text-xs
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-neutral-400
-                        peer-not-placeholder-shown:text-xs
-                        peer-not-placeholder-shown:-translate-y-1.5
-                        peer-not-placeholder-shown:text-neutral-400">Email</label>
-                    </div>
-                    <!-- End Input -->
+                <!-- Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 mt-10 lg:mt-14">
+                    <div class="border-b border-neutral-800 pb-10 mb-10 md:border-b-0 md:pb-0 md:mb-0">
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Input -->
+                                <div class="relative">
+                                    <input type="text" wire:model='latitude' id="latitude" name="latitude" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                        focus:pt-6
+                                        focus:pb-2
+                                        not-placeholder-shown:pt-6
+                                        not-placeholder-shown:pb-2
+                                        autofill:pt-6
+                                        autofill:pb-2" placeholder="Latitude" readonly="" required>
+                                    <label for="latitude" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                        peer-focus:text-xs
+                                        peer-focus:-translate-y-1.5
+                                        peer-focus:text-neutral-400
+                                        peer-not-placeholder-shown:text-xs
+                                        peer-not-placeholder-shown:-translate-y-1.5
+                                        peer-not-placeholder-shown:text-neutral-400">Latitude</label>
+                                    @error('latitude')
+                                        <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <!-- End Input -->
 
-                    <!-- Input -->
-                    <div class="relative">
-                        <input type="text" id="hs-tac-input-phone" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
-                        focus:pt-6
-                        focus:pb-2
-                        not-placeholder-shown:pt-6
-                        not-placeholder-shown:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="Phone">
-                        <label for="hs-tac-input-phone" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:text-xs
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-neutral-400
-                        peer-not-placeholder-shown:text-xs
-                        peer-not-placeholder-shown:-translate-y-1.5
-                        peer-not-placeholder-shown:text-neutral-400">Phone</label>
-                    </div>
-                    <!-- End Input -->
+                                <!-- Input -->
+                                <div class="relative">
+                                    <input type="text" wire:model='longitude' id="longitude" name="longitude" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                        focus:pt-6
+                                        focus:pb-2
+                                        not-placeholder-shown:pt-6
+                                        not-placeholder-shown:pb-2
+                                        autofill:pt-6
+                                        autofill:pb-2" placeholder="Longitude" readonly="" required>
+                                        <label for="longitude" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                        peer-focus:text-xs
+                                        peer-focus:-translate-y-1.5
+                                        peer-focus:text-neutral-400
+                                        peer-not-placeholder-shown:text-xs
+                                        peer-not-placeholder-shown:-translate-y-1.5
+                                        peer-not-placeholder-shown:text-neutral-400">Longitude</label>
+                                    @error('longitude')
+                                        <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <!-- End Input -->
 
-                    <!-- Textarea -->
-                    <div class="relative">
-                        <textarea id="hs-tac-message" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
-                        focus:pt-6
-                        focus:pb-2
-                        not-placeholder-shown:pt-6
-                        not-placeholder-shown:pb-2
-                        autofill:pt-6
-                        autofill:pb-2" placeholder="This is a textarea placeholder" data-hs-textarea-auto-height></textarea>
-                        <label for="hs-tac-message" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:text-xs
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-neutral-400
-                        peer-not-placeholder-shown:text-xs
-                        peer-not-placeholder-shown:-translate-y-1.5
-                        peer-not-placeholder-shown:text-neutral-400">Tell us about your project</label>
-                    </div>
-                    <!-- End Textarea -->
-                    </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Input -->
+                                <div class="relative">
+                                    <input type="text" wire:model.blur='first_name' id="first_name" name="first_name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                        focus:pt-6
+                                        focus:pb-2
+                                        not-placeholder-shown:pt-6
+                                        not-placeholder-shown:pb-2
+                                        autofill:pt-6
+                                        autofill:pb-2" placeholder="First Name">
+                                    <label for="first_name" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                        peer-focus:text-xs
+                                        peer-focus:-translate-y-1.5
+                                        peer-focus:text-neutral-400
+                                        peer-not-placeholder-shown:text-xs
+                                        peer-not-placeholder-shown:-translate-y-1.5
+                                        peer-not-placeholder-shown:text-neutral-400">First Name</label>
+                                    @error('first_name')
+                                        <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <!-- End Input -->
 
-                    <div class="mt-2">
-                    <p class="text-xs text-neutral-500">
-                        All fields are required
-                    </p>
+                                <!-- Input -->
+                                <div class="relative">
+                                    <input type="text" wire:model.blur='last_name' id="last_name" name="last_name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                        focus:pt-6
+                                        focus:pb-2
+                                        not-placeholder-shown:pt-6
+                                        not-placeholder-shown:pb-2
+                                        autofill:pt-6
+                                        autofill:pb-2" placeholder="Last Name">
+                                    <label for="last_name" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                        peer-focus:text-xs
+                                        peer-focus:-translate-y-1.5
+                                        peer-focus:text-neutral-400
+                                        peer-not-placeholder-shown:text-xs
+                                        peer-not-placeholder-shown:-translate-y-1.5
+                                        peer-not-placeholder-shown:text-neutral-400">Last Name</label>
+                                    @error('last_name')
+                                        <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <!-- End Input -->
+                            </div>
 
-                    <p class="mt-5">
-                        <a class="group inline-flex items-center gap-x-2 py-2 px-3 bg-red-600 font-medium text-sm text-neutral-800 rounded-full focus:outline-hidden" href="#">
-                        Submit
+                            <!-- Input -->
+                            <div class="relative">
+                                <input type="email" wire:model.blur='email' id="email" name="email" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                focus:pt-6
+                                focus:pb-2
+                                not-placeholder-shown:pt-6
+                                not-placeholder-shown:pb-2
+                                autofill:pt-6
+                                autofill:pb-2" placeholder="Email">
+                                <label for="email" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                peer-focus:text-xs
+                                peer-focus:-translate-y-1.5
+                                peer-focus:text-neutral-400
+                                peer-not-placeholder-shown:text-xs
+                                peer-not-placeholder-shown:-translate-y-1.5
+                                peer-not-placeholder-shown:text-neutral-400">Email</label>
+                                @error('email')
+                                    <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <!-- End Input -->
+
+                            <!-- Input -->
+                            <div class="relative">
+                                <input type="text" wire:model.blur='phone' id="phone" name="phone" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                focus:pt-6
+                                focus:pb-2
+                                not-placeholder-shown:pt-6
+                                not-placeholder-shown:pb-2
+                                autofill:pt-6
+                                autofill:pb-2" placeholder="Phone">
+                                <label for="phone" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                peer-focus:text-xs
+                                peer-focus:-translate-y-1.5
+                                peer-focus:text-neutral-400
+                                peer-not-placeholder-shown:text-xs
+                                peer-not-placeholder-shown:-translate-y-1.5
+                                peer-not-placeholder-shown:text-neutral-400">Phone</label>
+                                @error('phone')
+                                <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <!-- End Input -->
+
+                            <!-- Floating Select -->
+                            <div class="relative">
+
+                                <select wire:model="incident_type_id" class="peer p-4 pe-9 block w-full block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent
+                                focus:pt-6
+                                focus:pb-2
+                                not-placeholder-shown:pt-6
+                                not-placeholder-shown:pb-2
+                                autofill:pt-6
+                                autofill:pb-2">
+                                <option value="" selected="">Select an incident type</option>
+                                @foreach ($incidentTypes as $type)
+                                    <option wire:key="{{ $type->id }}" value="{{ $type->id }}">{{ $type->inc_name }}</option>
+                                @endforeach
+                                </select>
+                                <label class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                peer-focus:text-xs
+                                peer-focus:-translate-y-1.5
+                                peer-focus:text-gray-500 dark:peer-focus:text-neutral-500
+                                peer-not-placeholder-shown:text-xs
+                                peer-not-placeholder-shown:-translate-y-1.5
+                                peer-not-placeholder-shown:text-gray-500 dark:peer-not-placeholder-shown:text-neutral-500 dark:text-neutral-500">Incident Type</label>
+                                @error('incident_type_id')
+                                    <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <!-- End Floating Select -->
+                            <!-- Textarea -->
+                            <div class="relative">
+                                <textarea wire:model.blur='description' rows="6" id="description" name="description" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                focus:pt-6
+                                focus:pb-2
+                                not-placeholder-shown:pt-6
+                                not-placeholder-shown:pb-2
+                                autofill:pt-6
+                                autofill:pb-2" placeholder="Description" data-hs-textarea-auto-height></textarea>
+                                <label for="description" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                peer-focus:text-xs
+                                peer-focus:-translate-y-1.5
+                                peer-focus:text-neutral-400
+                                peer-not-placeholder-shown:text-xs
+                                peer-not-placeholder-shown:-translate-y-1.5
+                                peer-not-placeholder-shown:text-neutral-400">Description</label>
+
+                                @error('description')
+                                    <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <!-- End Textarea -->
+                            </div>
+
+                            <div class="mt-5 lg:mt-8">
+                                <h2 class="mb-4 text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                                    {{ __('Priority') }}
+                                </h2>
+                                @php
+                                    $priorities = [
+                                        'low' => [
+                                            'label' => 'Low',
+                                            'svg' => '<svg class="size-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181" /></svg>'
+                                        ],
+                                        'medium' => [
+                                            'label' => 'Medium',
+                                            'svg' => '<svg class="size-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>'
+                                        ],
+                                        'high' => [
+                                            'label' => 'High',
+                                            'svg' => '<svg class="size-6 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>'
+                                        ],
+                                        'critical' => [
+                                            'label' => 'Critical',
+                                            'svg' => '<svg class="size-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>'
+                                        ],
+                                    ];
+                                @endphp
+
+                                <div class="grid sm:grid-cols-2 gap-2">
+                                    @foreach ($priorities as $value => $data)
+                                        <label
+                                            class="flex items-center p-3 w-full border rounded-lg text-sm cursor-pointer transition-all
+                                                {{ $priority === $value ? 'bg-neutral-200 dark:bg-neutral-800' : 'bg-white dark:bg-neutral-900' }}
+                                                border-gray-200 dark:border-neutral-700 text-gray-800 dark:text-neutral-300"
+                                        >
+                                            <input
+                                                type="radio"
+                                                wire:model.live="priority"
+                                                value="{{ $value }}"
+                                                class="sr-only shrink-0 mt-0.5 border-gray-200 rounded-full text-red-600 focus:ring-red-500 checked:border-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800"
+                                            >
+
+                                            <span class="flex items-center gap-2">
+                                                {!! $data['svg'] !!}
+                                                {{ $data['label'] }}
+                                            </span>
+                                        </label>
+
+                                        @error('priority')
+                                            <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                        @enderror
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <p class="text-xs text-neutral-500">
+                                    All fields are required
+                                </p>
+                            </div>
+                        </div>
+
+                    <div>
+                        <!-- Repeater -->
+                        <div class="space-y-14">
+                            <!-- Card -->
+                            <div class="flex flex-col border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 dark:border-neutral-700">
+                                <h2 class="mb-4 text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                                    Person's Involved
+                                </h2>
+                                <div class="grid gap-4">
+                                    @foreach ($involved as $index => $person)
+                                    <!-- Input -->
+                                    <div class="relative">
+                                        <div class="flex flex-row gap-x-3">
+                                            <input type="text" wire:model.blur="involved.{{ $index }}.name" id="{{ $index }}.name" name="{{ $index }}.name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                                focus:pt-6
+                                                focus:pb-2
+                                                not-placeholder-shown:pt-6
+                                                not-placeholder-shown:pb-2
+                                                autofill:pt-6
+                                                autofill:pb-2" placeholder="Name">
+                                            <label for="{{ $index }}.name" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                                peer-focus:text-xs
+                                                peer-focus:-translate-y-1.5
+                                                peer-focus:text-neutral-400
+                                                peer-not-placeholder-shown:text-xs
+                                                peer-not-placeholder-shown:-translate-y-1.5
+                                                peer-not-placeholder-shown:text-neutral-400">Name</label>
+
+                                            <button type="button" wire:click="removePerson({{ $index }})"
+                                                class="py-3 px-4 mx-auto inline-flex items-center align-middle text-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                <svg class="shrink-0 size-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    @error('involved.{{ $index }}.name')
+                                        <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                    @enderror
+                                    <!-- End Input -->
+                                    @endforeach
+
+                                    <button type="button" wire:click="addPerson" class="py-2 px-3 mx-auto inline-flex items-center align-middle text-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
+                                        <svg class="shrink-0 size-4"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                        {{ __('Add another person') }}
+                                    </button>
+                                </div>
+                                <!-- End Grid -->
+                            </div>
+                            <!-- End Card -->
+                        </div>
+                        <!-- End Repeater -->
+
+                        <div class="mt-8">
+                            <div class="max-w-full">
+                                <!-- Card -->
+                                <div class="flex flex-col border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 dark:border-neutral-700">
+                                    <div class="flex flex-row gap-x-3 justify-between items-center align-middle mb-5 lg:mb-7 ">
+
+                                        <div>
+                                            <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                                                {{ __('Incident Photo') }}
+                                            </h2>
+                                        </div>
+
+                                        <div>
+                                            <button type="button" wire:click="addImage" class="py-2 px-3 mx-auto inline-flex items-center align-middle text-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                <svg class="shrink-0 size-4"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                                </svg>
+                                                {{ __('Add image') }}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    @foreach ($incident_images as $index => $upIncidentImage)
+                                    <div class="flex flex-row justify-between mt-4">
+
+                                        <div>
+                                            <label class="block">
+                                                <span class="sr-only">Choose incident photo</span>
+                                                <input type="file" wire:model.blur="incident_images.{{ $index }}.image_path" id="{{ $index }}.image_path" name="{{ $index }}.image_path" class="block w-full text-sm text-gray-500
+                                                file:me-4 file:py-2 file:px-4
+                                                file:rounded-lg file:border-0
+                                                file:text-sm file:font-semibold
+                                                file:bg-red-600 file:text-white
+                                                hover:file:bg-red-700
+                                                file:disabled:opacity-50 file:disabled:pointer-events-none
+                                                dark:text-neutral-500
+                                                dark:file:bg-red-600
+                                                dark:hover:file:bg-red-600
+                                                ">
+                                            </label>
+
+                                        </div>
+                                        <div>
+                                            <button type="button" wire:click="removeImage({{ $index }})"
+                                                    class="py-2 px-2 mx-auto inline-flex items-center align-middle text-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
+                                                    <svg class="shrink-0 size-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                    </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    @error('incident_images.{{ $index }}.image_path')
+                                        <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                    @enderror
+                                    @endforeach
+
+                                </div>
+                                <!-- End Card -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- End Grid -->
+
+                <p class="mt-5">
+                    <button type="submit" class="group inline-flex items-center gap-x-2 py-3 px-4 bg-red-600 font-medium text-sm text-neutral-800 rounded-lg focus:outline-hidden text-white hover:bg-red-700 focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
+                        {{ __('Submit') }}
                         <svg class="shrink-0 size-4 transition group-hover:translate-x-0.5 group-hover:translate-x-0 group-focus:translate-x-0.5 group-focus:translate-x-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
-                    </p>
-                    </div>
-                </form>
-                </div>
-                <!-- End Col -->
-
-                <div class="space-y-14">
-                <!-- Item -->
-                <div class="flex gap-x-5">
-                    <svg class="shrink-0 size-6 text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <div class="grow">
-                    <h4 class="text-white font-semibold">Our address:</h4>
-
-                    <address class="mt-1 text-neutral-400 text-sm not-italic">
-                        Osmeña Ave, Victorias City, Negros Occidental
-                    </address>
-                    </div>
-                </div>
-                <!-- End Item -->
-
-                <!-- Item -->
-                <div class="flex gap-x-5">
-                    <svg class="shrink-0 size-6 text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg>
-                    <div class="grow">
-                    <h4 class="text-white font-semibold">Email us:</h4>
-
-                    <a class="mt-1 text-neutral-400 text-sm hover:text-neutral-200 focus:outline-hidden focus:text-neutral-200" href="#mailto:example@site.co" target="_blank">
-                       vieresponse@gmail.com
-                    </a>
-                    </div>
-                </div>
-                <!-- End Item -->
-
-                <!-- Item -->
-                <div class="flex gap-x-5">
-                    <svg class="shrink-0 size-6 text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-                    <div class="grow">
-                    <h4 class="text-white font-semibold">Lorem, ipsum dolor</h4>
-                    <p class="mt-1 text-neutral-400">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi magnam est earum. Ipsa, beatae in?</p>
-                    <p class="mt-2">
-                        <a class="group inline-flex items-center gap-x-2 font-medium text-sm text-[#ff0] decoration-2 hover:underline focus:outline-hidden focus:underline" href="#">
-                            Volunteer
-                        <svg class="shrink-0 size-4 transition group-hover:translate-x-0.5 group-hover:translate-x-0 group-focus:translate-x-0.5 group-focus:translate-x-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
-                    </p>
-                    </div>
-                </div>
-                <!-- End Item -->
-                </div>
-                <!-- End Col -->
-            </div>
-            <!-- End Grid -->
-
-
+                    </button>
+                </p>
+            </form>
         </div>
     </div>
     <!-- End Contact Us -->
 
+
+
     @push('scripts')
-        <script>
-            window.addEventListener('load', () => {
-                (function () {
-                    const map = L.map('hs-pin-leaflet', {
-                        center: [10.885, 123.075],
-                        zoom: 13,
-                        // maxBounds: [
-                        //     [10.83, 122.98], // Slightly more southwest
-                        //     [10.94, 123.17]  // Slightly more northeast
-                        // ],
-                        // maxBoundsViscosity: 0.4
-                    });
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            (function () {
+                const mapContainer = document.getElementById('hs-pin-leaflet');
+                if (!mapContainer || mapContainer.dataset.mapInitialized === 'true') return;
 
-                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 19,
-                        minZoom: 2,
-                        attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    }).addTo(map);
+                const map = L.map('hs-pin-leaflet', {
+                    center: [10.885, 123.075],
+                    zoom: 13
+                });
 
-                    // Define a variable to hold the single marker
-                    let singleMarker;
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    minZoom: 2,
+                    attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
 
-                    // Add marker on click, and update it if it already exists
-                    map.on('click', function (e) {
-                        const { lat, lng } = e.latlng;
+                let singleMarker;
 
-                        if (singleMarker) {
-                            // If marker exists, just move and update the popup
-                            singleMarker.setLatLng([lat, lng])
-                                .setPopupContent(`You clicked at:<br><strong>${lat.toFixed(5)}, ${lng.toFixed(5)}</strong>`)
-                                .openPopup();
-                        } else {
-                            // If no marker yet, create a new one
-                            singleMarker = L.marker([lat, lng])
-                                .addTo(map)
-                                .bindPopup(`You clicked at:<br><strong>${lat.toFixed(5)}, ${lng.toFixed(5)}</strong>`)
-                                .openPopup();
-                        }
-                    });
+                map.on('click', function (e) {
+                    const { lat, lng } = e.latlng;
 
-                })();
-            });
-        </script>
+                    document.getElementById('latitude').value = lat.toFixed(5);
+                    document.getElementById('longitude').value = lng.toFixed(5);
+
+
+                    const latInput = document.getElementById('latitude');
+                    const lngInput = document.getElementById('longitude');
+
+                    latInput.value = lat.toFixed(5);
+                    lngInput.value = lng.toFixed(5);
+
+                    latInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    lngInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+                    const popupContent = `You clicked at:<br><strong>${lat.toFixed(5)}, ${lng.toFixed(5)}</strong>`;
+
+                    if (singleMarker) {
+                        singleMarker.setLatLng([lat, lng])
+                            .setPopupContent(popupContent)
+                            .openPopup();
+                    } else {
+                        singleMarker = L.marker([lat, lng])
+                            .addTo(map)
+                            .bindPopup(popupContent)
+                            .openPopup();
+                    }
+                });
+
+                // Prevent re-initializing if already done
+                mapContainer.dataset.mapInitialized = 'true';
+            })();
+        });
+    </script>
     @endpush
+
+
+
 </div>

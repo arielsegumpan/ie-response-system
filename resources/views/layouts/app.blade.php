@@ -9,7 +9,6 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         <link rel="shortcut icon" href="{{ asset('imgs/ie-logo.png') }}" type="image/x-icon">
-
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -108,8 +107,7 @@
 
         </style>
     </head>
-    <body class="bg-[#f3f3f3]  dark:bg-neutral-900 max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 antialiased">
-
+    <body class="bg-[#f7f7f7] dark:bg-neutral-900 max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 antialiased">
         <livewire:partials.navigation />
 
         <main>
