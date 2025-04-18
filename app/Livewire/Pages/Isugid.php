@@ -46,7 +46,8 @@ class Isugid extends Component
             'priority' => ['required', Rule::in(['low', 'medium', 'high', 'critical'])],
             'incident_type_id' => ['required', 'exists:incident_types,id'],
             'involved' => ['array'],
-            'involved.*.name' => ['string', 'max:255'],
+            'involved.*.name' => ['string', 'max:180'],
+            'involved.*.injury' => ['string', 'max:300'],
             'incident_images' => ['array'],
             'incident_images.*.image_path' => ['nullable', 'file', 'max:5024', 'mimes:jpg,jpeg,png'],
         ];
@@ -61,6 +62,8 @@ class Isugid extends Component
             'involved.*.name.max' => 'The name may not be greater than 255 characters.',
             'involved.*.name.string' => 'The name must be a string.',
             'involved.*.name.required' => 'The name field is required.',
+            'involved.*.injury.max' => 'The injury may not be greater than 300 characters.',
+            'involved.*.injury.string' => 'The injury must be a string.',
             'incident_images.*.image_path.file' => 'The image must be a file.',
             'incident_type_id.exists' => 'The selected incident type is invalid.',
         ];
@@ -69,7 +72,7 @@ class Isugid extends Component
 
     public function addPerson()
     {
-        $this->involved[] = ['name' => null];
+        $this->involved[] = ['name' => null, 'injury' => null];
     }
 
     public function addImage()
@@ -99,19 +102,20 @@ class Isugid extends Component
         $validated['phone'] = preg_replace('/[^0-9+]/', '', $validated['phone']);
         $validated['description'] = htmlspecialchars(strip_tags($validated['description']));
 
+        // dd($validated);
         try {
             DB::beginTransaction();
 
             $user = User::create([
-                'name' => $validated['first_name'] . ' ' . $validated['last_name'],
+                'name' => ucfirst($validated['first_name']) . ' ' . ucfirst($validated['last_name']),
                 'email' => $validated['email'],
                 'password' => bcrypt(Str::random(16)),
             ]);
 
             // Create Profile
             $user->profile()->create([
-                'first_name' => $validated['first_name'],
-                'last_name' => $validated['last_name'],
+                'first_name' => ucfirst($validated['first_name']),
+                'last_name' => ucfirst($validated['last_name']),
                 'phone' => $validated['phone'],
             ]);
 
@@ -120,7 +124,14 @@ class Isugid extends Component
                 'reporter_id' => Auth::id(),
                 'incident_type_id' => $validated['incident_type_id'],
                 'incident_number' => 'INC-NUM' . '-' . strtoupper(Str::random(6)) . '-' . rand(500, 9999),
-                'involved' => array_map(fn ($item) => ['name' => strip_tags($item['name'])], $validated['involved']),
+                'involved' => array_map(
+                    fn ($item) =>
+                    [
+                        'name' => strip_tags(ucwords($item['name'])),
+                        'injury' => strip_tags(ucfirst($item['injury']))
+                    ],
+                    $validated['involved']
+                ),
                 'description' => $validated['description'],
                 'priority' => $validated['priority'],
                 'status' => 'reported',

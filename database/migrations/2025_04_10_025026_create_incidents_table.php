@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('verified_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('incident_number')->unique()->index();
             $table->json('involved')->nullable();
-            $table->text('injuries_damage')->nullable();
             $table->text('recommendations')->nullable();
             $table->longText('description');
             $table->enum('status', ['reported','verified','in_progress','resolved','closed'])->default('reported');

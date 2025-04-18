@@ -198,15 +198,15 @@
                     attribution: '© OpenStreetMap contributors'
                 }).addTo(map);
 
-                function createPopupContent(inc_name, incident_number, created_at, status, imageArray) {
+                function createPopupContent(inc_name, incident_number, created_at, formatted_created_at, status, imageArray) {
                     let imagesHtml = '';
                     if (Array.isArray(imageArray)) {
                         imagesHtml = imageArray.map(img => {
-                            return `<img class="inline-block size-8 rounded-lg object-cover ring-2 mt-2 ring-white dark:ring-nuetral-400" src="${img.image_url}" alt="Incident Image">`;
+                            return `<img class="inline-block size-8 rounded-lg object-cover ring-2 mt-2 ring-white dark:ring-nuetral-400" src="${img.image_url}" alt="${inc_name}">`;
                         }).join('');
                     }
                     return `
-                        <div class="max-w-[12rem]">
+                        <div class="min-w-[12rem]">
                             <a href="/incidents/${incident_number}">
                                 <h3 class="text-lg font-bold text-red-600">
                                     ${inc_name.toUpperCase()}
@@ -214,12 +214,9 @@
                             </a>
 
                             <div class="flex items-center justify-between items-center align-middle">
-
-
-
                                 <div>
                                     <div class="text-sm text-gray-500 dark:text-neutral-500">
-                                        ${created_at}
+                                        <small>${formatted_created_at}</small>
                                     </div>
                                     <div class="mt-1">
                                         <small>
@@ -233,6 +230,10 @@
                                     ${imagesHtml}
                                 </div>
 
+                            </div>
+
+                            <div class="text-sm text-gray-500 dark:text-neutral-500 mt-2">
+                                <small>${created_at}</small>
                             </div>
                         </div>
                     `;
@@ -258,13 +259,14 @@
                                 .bindPopup(createPopupContent(
                                     incident.type.inc_name,
                                     incident.incident_number,
+                                    incident.carb_created_at,
                                     incident.formatted_created_at,
                                     incident.status,
                                     incident.images
                                 ))
                                 .addTo(map);
 
-                            // 🔥 Store the first marker as most recent
+                            // Store the first marker as most recent
                             if (index === 0) {
                                 mostRecentMarker = marker;
                             }

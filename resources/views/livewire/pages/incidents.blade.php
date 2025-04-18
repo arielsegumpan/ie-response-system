@@ -116,43 +116,46 @@
                     </span>
 
                     <address class="mt-4 not-italic text-gray-800 dark:text-neutral-200">
-                        <small class="text-gray-500 dark:text-neutral-500">{{ $incident->location?->latitude }}, {{ $incident->location?->longitude }}</small>
+                        <small class="text-gray-500 dark:text-neutral-500">
+                            {{ __('lat, lng : ') }}
+                            {{ $incident->location?->latitude }}, {{ $incident->location?->longitude }}
+                        </small>
                     </address>
+
+                    <dl class="flex flex-col gap-x-3 mt-4">
+                        <dt class="font-semibold text-gray-800 dark:text-neutral-200">Incident date:</dt>
+                        <dd class="text-gray-500 dark:text-neutral-500">{{ $incident->created_at->format('F j, Y, g:i a') }}</dd>
+                    </dl>
                 </div>
             <!-- Col -->
             </div>
             <!-- End Grid -->
 
-            <!-- Grid -->
-            <div class="mt-8 grid sm:grid-cols-2 gap-3">
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">Bill to:</h3>
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">Sara Williams</h3>
-                <address class="mt-2 not-italic text-gray-500 dark:text-neutral-500">
-                280 Suzanne Throughway,<br>
-                Breannabury, OR 45801,<br>
-                United States<br>
-                </address>
-            </div>
-            <!-- Col -->
 
-            <div class="sm:text-end space-y-2">
-                <!-- Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
-                <dl class="grid sm:grid-cols-5 gap-x-3">
-                    <dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Invoice date:</dt>
-                    <dd class="col-span-2 text-gray-500 dark:text-neutral-500">03/10/2018</dd>
-                </dl>
-                <dl class="grid sm:grid-cols-5 gap-x-3">
-                    <dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Due date:</dt>
-                    <dd class="col-span-2 text-gray-500 dark:text-neutral-500">03/11/2018</dd>
-                </dl>
+            <!-- Table -->
+            <div class="mt-6">
+                <div class="border border-gray-200 p-4 rounded-lg space-y-4 dark:border-neutral-700">
+                    <div class="hidden sm:grid sm:grid-cols-5">
+                        <div class="sm:col-span-2 text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Persons Involved</div>
+                        <div class="text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Injury</div>
+                    </div>
+
+                    @foreach ($incident->involved as $involved)
+                        <div class="hidden sm:block border-b border-gray-200 dark:border-neutral-700"></div>
+
+                        <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
+
+                            <div class="col-span-full sm:col-span-2">
+                                <p class="font-medium text-gray-800 dark:text-neutral-200">{{ $involved['name'] }}</p>
+                            </div>
+                            <div class="col-span-full sm:col-span-3">
+                                <p class="text-gray-800 dark:text-neutral-400">{{ $involved['injury'] }}</p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <!-- End Grid -->
             </div>
-            <!-- Col -->
-            </div>
-            <!-- End Grid -->
+            <!-- End Table -->
 
             <div class="mt-8 sm:mt-12 text-lg text-gray-800 dark:text-neutral-200">
                 {!! str($incident->description)->sanitizeHtml() !!}
@@ -202,8 +205,6 @@
                 </div>
                 <!-- End Slider -->
             </div>
-
-            <p class="mt-5 text-sm text-gray-500 dark:text-neutral-500">{{ $incident->created_at }}</p>
         </div>
         <!-- End Card -->
 

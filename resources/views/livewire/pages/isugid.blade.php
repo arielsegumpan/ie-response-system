@@ -5,44 +5,43 @@
         <div class="max-w-2xl lg:max-w-5xl mx-auto">
             <!--Alert-->
             @if (session()->has('success'))
-            <div
+                <div
+                    x-data="{ show: true }"
+                    x-init="setTimeout(() => show = false, 3000)"
+                    x-show="show"
+                    x-transition="fade"
 
-            x-data="{ show: true }"
-            x-init="setTimeout(() => show = false, 3000)"
-            x-show="show"
-            x-transition="fade"
-
-            class="bg-teal-50 border-t-2 border-teal-500 rounded-lg p-4 dark:bg-teal-800/30 mb-6" role="alert" tabindex="-1" aria-labelledby="hs-bordered-success-style-label">
-                <div class="flex">
-                <div class="shrink-0">
-                    <!-- Icon -->
-                    <span class="inline-flex justify-center items-center size-8 rounded-full border-4 border-teal-100 bg-teal-200 text-teal-800 dark:border-teal-900 dark:bg-teal-800 dark:text-teal-400">
-                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
-                        <path d="m9 12 2 2 4-4"></path>
-                    </svg>
-                    </span>
-                    <!-- End Icon -->
+                    class="bg-teal-50 border-t-2 border-teal-500 rounded-lg p-4 dark:bg-teal-800/30 mb-6" role="alert" tabindex="-1" aria-labelledby="hs-bordered-success-style-label">
+                        <div class="flex">
+                            <div class="shrink-0">
+                                <!-- Icon -->
+                                <span class="inline-flex justify-center items-center size-8 rounded-full border-4 border-teal-100 bg-teal-200 text-teal-800 dark:border-teal-900 dark:bg-teal-800 dark:text-teal-400">
+                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                                    <path d="m9 12 2 2 4-4"></path>
+                                </svg>
+                                </span>
+                                <!-- End Icon -->
+                            </div>
+                            <div class="ms-3">
+                                <h3 id="hs-bordered-success-style-label" class="text-gray-800 font-semibold dark:text-white">
+                                    {{ __('Successfully Reported.') }}
+                                </h3>
+                                <p class="text-sm text-gray-700 dark:text-neutral-400">
+                                    {{ session('success') }}
+                                </p>
+                            </div>
+                        </div>
                 </div>
-                <div class="ms-3">
-                    <h3 id="hs-bordered-success-style-label" class="text-gray-800 font-semibold dark:text-white">
-                        {{ __('Successfully Reported.') }}
-                    </h3>
-                    <p class="text-sm text-gray-700 dark:text-neutral-400">
-                        {{ session('success') }}
-                    </p>
-                </div>
-                </div>
-            </div>
             @endif
             <!-- End of Alert -->
 
             <div class="text-center">
                 <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
-                Isugid Mo!
+                    {{ __('Isugid Mo!') }}
                 </h1>
                 <p class="mt-1 text-gray-600 dark:text-neutral-400">
-                We'd love to help. report any incidents or issues
+                    {{ __(" We'd love to help. Report any incidents or issues") }}
                 </p>
             </div>
 
@@ -55,9 +54,8 @@
             </div>
 
             <form wire:submit.prevent="submit">
-
                 <!-- Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 lg:gap-x-16 mt-10 lg:mt-14">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 lg:gap-x-8 mt-10 lg:mt-14">
                     <div class="border-b border-neutral-800 pb-10 mb-10 md:border-b-0 md:pb-0 md:mb-0">
                         <div class="space-y-4">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -199,28 +197,46 @@
                             <!-- Floating Select -->
                             <div class="relative">
 
-                                <select wire:model="incident_type_id" class="peer p-4 pe-9 block w-full block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent
-                                focus:pt-6
-                                focus:pb-2
-                                not-placeholder-shown:pt-6
-                                not-placeholder-shown:pb-2
-                                autofill:pt-6
-                                autofill:pb-2">
-                                <option value="" selected="">Select an incident type</option>
-                                @foreach ($incidentTypes as $type)
-                                    <option wire:key="{{ $type->id }}" value="{{ $type->id }}">{{ $type->inc_name }}</option>
-                                @endforeach
-                                </select>
-                                <label class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                                peer-focus:text-xs
-                                peer-focus:-translate-y-1.5
-                                peer-focus:text-gray-500 dark:peer-focus:text-neutral-500
-                                peer-not-placeholder-shown:text-xs
-                                peer-not-placeholder-shown:-translate-y-1.5
-                                peer-not-placeholder-shown:text-gray-500 dark:peer-not-placeholder-shown:text-neutral-500 dark:text-neutral-500">Incident Type</label>
-                                @error('incident_type_id')
+                                <div class="w-full dark:text-white" wire:ignore>
+                                    <select
+                                    wire:model.defer="incident_type_id"
+                                    id="incident_type_id"
+                                    name="incident_type_id"
+                                    class="bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:text-white"
+                                    data-hs-select='{
+                                        "hasSearch": true,
+
+                                        "searchLimit": 5,
+
+                                        "searchPlaceholder": "Search incident type...",
+
+                                        "placeholder": "Select incident type",
+
+                                        "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+
+                                        "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-hidden focus:ring-2 focus:ring-red-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200 dark:focus:outline-hidden dark:focus:ring-1 dark:focus:ring-neutral-600",
+
+                                        "dropdownClasses": "mt-2 max-h-72 pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+
+                                        "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+
+                                        "searchClasses": "block w-full sm:text-sm border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 before:absolute before:inset-0 before:z-1 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-1.5 sm:py-2 px-3",
+                                        "searchWrapperClasses": "sticky top-0 z-10 bg-white p-2 dark:bg-neutral-800",
+
+                                        "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
+
+                                        "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                                    }'
+                                    >
+                                    <option value="">Select incident type</option>
+                                    @foreach ($incidentTypes as $type)
+                                        <option value="{{ $type->id }}">{{ $type->inc_name }}</option>
+                                    @endforeach
+                                    </select>
+                                    @error('incident_type_id')
                                     <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
-                                @enderror
+                                    @enderror
+                                </div>
                             </div>
                             <!-- End Floating Select -->
                             <!-- Textarea -->
@@ -312,27 +328,48 @@
                             <!-- Card -->
                             <div class="flex flex-col border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 dark:border-neutral-700">
                                 <h2 class="mb-4 text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                    Person's Involved
+                                {{ __("Person's Involved") }}
                                 </h2>
                                 <div class="grid gap-4">
                                     @foreach ($involved as $index => $person)
                                     <!-- Input -->
                                     <div class="relative">
                                         <div class="flex flex-row gap-x-3">
-                                            <input type="text" wire:model.blur="involved.{{ $index }}.name" id="{{ $index }}.name" name="{{ $index }}.name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
-                                                focus:pt-6
-                                                focus:pb-2
-                                                not-placeholder-shown:pt-6
-                                                not-placeholder-shown:pb-2
-                                                autofill:pt-6
-                                                autofill:pb-2" placeholder="Name">
-                                            <label for="{{ $index }}.name" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                                                peer-focus:text-xs
-                                                peer-focus:-translate-y-1.5
-                                                peer-focus:text-neutral-400
-                                                peer-not-placeholder-shown:text-xs
-                                                peer-not-placeholder-shown:-translate-y-1.5
-                                                peer-not-placeholder-shown:text-neutral-400">Name</label>
+                                            <div class="relative flex-1">
+                                                <input type="text" wire:model.blur="involved.{{ $index }}.name" id="{{ $index }}.name" name="{{ $index }}.name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                                    focus:pt-6
+                                                    focus:pb-2
+                                                    not-placeholder-shown:pt-6
+                                                    not-placeholder-shown:pb-2
+                                                    autofill:pt-6
+                                                    autofill:pb-2" placeholder="Name">
+                                                <label for="{{ $index }}.name" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                                    peer-focus:text-xs
+                                                    peer-focus:-translate-y-1.5
+                                                    peer-focus:text-neutral-400
+                                                    peer-not-placeholder-shown:text-xs
+                                                    peer-not-placeholder-shown:-translate-y-1.5
+                                                    peer-not-placeholder-shown:text-neutral-400">{{ __("Name") }}
+                                                </label>
+                                            </div>
+
+                                            <div class="relative flex-1">
+                                                <input type="text" wire:model.blur="involved.{{ $index }}.injury" id="{{ $index }}.injury" name="{{ $index }}.injury" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                                    focus:pt-6
+                                                    focus:pb-2
+                                                    not-placeholder-shown:pt-6
+                                                    not-placeholder-shown:pb-2
+                                                    autofill:pt-6
+                                                    autofill:pb-2" placeholder="Injury">
+                                                <label for="{{ $index }}.injury" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                                    peer-focus:text-xs
+                                                    peer-focus:-translate-y-1.5
+                                                    peer-focus:text-neutral-400
+                                                    peer-not-placeholder-shown:text-xs
+                                                    peer-not-placeholder-shown:-translate-y-1.5
+                                                    peer-not-placeholder-shown:text-neutral-400">{{ __("Injury") }}
+                                                </label>
+                                            </div>
 
                                             <button type="button" wire:click="removePerson({{ $index }})"
                                                 class="py-3 px-4 mx-auto inline-flex items-center align-middle text-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
@@ -363,6 +400,7 @@
                         </div>
                         <!-- End Repeater -->
 
+                        <!-- INCIDENT PHOTO -->
                         <div class="mt-8">
                             <div class="max-w-full">
                                 <!-- Card -->
@@ -424,7 +462,7 @@
                                 <!-- End Card -->
                             </div>
                         </div>
-
+                        <!-- End INCIDENT PHOTO -->
                     </div>
                 </div>
                 <!-- End Grid -->
@@ -439,8 +477,6 @@
         </div>
     </div>
     <!-- End Contact Us -->
-
-
 
     @push('scripts')
     <script>

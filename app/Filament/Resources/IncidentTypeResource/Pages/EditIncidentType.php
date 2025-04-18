@@ -5,7 +5,7 @@ namespace App\Filament\Resources\IncidentTypeResource\Pages;
 use App\Filament\Resources\IncidentTypeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-
+use Illuminate\Support\Str;
 class EditIncidentType extends EditRecord
 {
     protected static string $resource = IncidentTypeResource::class;
@@ -21,4 +21,12 @@ class EditIncidentType extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['inc_name'] = Str::ucwords($data['inc_name']);
+
+        return $data;
+    }
+
 }

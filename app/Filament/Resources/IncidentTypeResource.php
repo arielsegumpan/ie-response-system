@@ -7,8 +7,10 @@ use Filament\Tables;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use App\Models\IncidentType;
 use Filament\Resources\Resource;
+use Filament\Actions\StaticAction;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
@@ -17,7 +19,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\IncidentTypeResource\Pages;
 use App\Filament\Resources\IncidentTypeResource\RelationManagers;
-use Illuminate\Support\Str;
 
 class IncidentTypeResource extends Resource
 {
@@ -81,7 +82,9 @@ class IncidentTypeResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()
+                ->slideOver()
+                ->stickyModalFooter(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),

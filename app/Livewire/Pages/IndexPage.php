@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use Carbon\Carbon;
 use App\Models\Blog;
 use Livewire\Component;
 use App\Models\Incident;
@@ -40,12 +41,15 @@ class IndexPage extends Component
         ->get()
         ->transform(function ($incident) {
             $incident->formatted_created_at = $incident->created_at->diffForHumans();
-
             $incident->images->transform(function ($image) {
                 $image->image_url = Storage::url($image->image_path);
                 return $image;
             });
 
+            return $incident;
+        })
+        ->map(function ($incident) {
+            $incident->carb_created_at = $incident->created_at->format("F j, Y, g:i a");
             return $incident;
         });
     }
