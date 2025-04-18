@@ -118,8 +118,12 @@ For inquiries or collaborations, please contact any of the research members list
 
 ## Screenshots
 
-![FireShot Capture 128 - Home -  ie-response-system test](https://github.com/user-attachments/assets/91e61ef6-8c45-48c6-851c-d68bb239d967)
+![FireShot Capture 139 - Home -  ie-response-system test](https://github.com/user-attachments/assets/5518faf1-6c82-4881-b98a-9bc0422ae624)
 
 ![FireShot Capture 129 - Blog -  ie-response-system test](https://github.com/user-attachments/assets/35a61a81-51da-404d-b4ab-929c95fb0f89)
+
+![FireShot Capture 137 - Isugid -  ie-response-system test](https://github.com/user-attachments/assets/05f0142c-3d02-4086-b20c-f1af020d2e55)
+
+![FireShot Capture 140 - IE Response System -  ie-response-system test](https://github.com/user-attachments/assets/de0a0991-2720-4a5a-bdbc-d04b3571e775)
 
 ![FireShot Capture 131 - Create Incident - IE Response System -  ie-response-system test](https://github.com/user-attachments/assets/d5307a5a-164c-4798-bedc-2fa7961c2e7f)
