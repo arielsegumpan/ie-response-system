@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             CategoryTagSeeder::class,
             BlogSeeder::class,
             IncidentTypeSeeder::class,
+            OrganizationTypeSeeder::class,
+            OrganizationSeeder::class,
         ]);
     }
 }

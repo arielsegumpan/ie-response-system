@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\IncidentResource\Pages;
+use Filament\Infolists\Components\RepeatableEntry;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Infolists\Components\Group as InfoGroup;
 use Filament\Infolists\Components\Section as InfoSection;
@@ -534,7 +535,7 @@ class IncidentResource extends Resource
                     // Basic Configuration
                     ->defaultLocation(latitude: 40.4168, longitude: -3.7038)
                     ->draggable(false) // Usually false for infolist view
-                    ->zoom(15)
+                    ->zoom(17)
                     ->minZoom(0)
                     ->maxZoom(28)
                     ->tilesUrl("https://tile.openstreetmap.de/{z}/{x}/{y}.png")
@@ -563,11 +564,27 @@ class IncidentResource extends Resource
                     ->html()
                     ->markdown()
                     ->columnSpanFull(),
+                ]),
 
 
-
-
+                InfoSection::make()
+                ->schema([
+                    RepeatableEntry::make('involved')
+                    ->label('Persons Involved')
+                    ->schema([
+                        TextEntry::make('name')
+                        ->hiddenlabel()
+                        ->weight(FontWeight::Bold)
+                        ->size(TextEntry\TextEntrySize::Large)
+                        ->color('success'),
+                        TextEntry::make('injury')
+                        ->label("Injury's/Damage :")
+                        ->weight(FontWeight::Bold)
+                        ->size(TextEntry\TextEntrySize::Medium),
+                    ])
+                    ->grid(2),
                 ])
+
 
             ]);
     }

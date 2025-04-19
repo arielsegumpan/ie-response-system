@@ -176,6 +176,7 @@ class OrganizationResource extends Resource
                 ->formatStateUsing(fn ($state) => ucwords($state)),
 
                 TextColumn::make('org_contact_phone')
+                ->icon('heroicon-o-phone')
                 ->label(__('Contact Number'))
                 ->searchable()
                 ->sortable()

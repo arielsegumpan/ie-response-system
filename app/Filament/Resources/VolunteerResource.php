@@ -21,7 +21,7 @@ use App\Filament\Resources\VolunteerResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\VolunteerResource\RelationManagers;
 use Filament\Forms\Components\RichEditor;
-
+use Illuminate\Support\Str;
 class VolunteerResource extends Resource
 {
     protected static ?string $model = Volunteer::class;
@@ -117,7 +117,66 @@ class VolunteerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('user.name')
+                ->label(__('Name'))
+                ->searchable()
+                ->sortable()
+                ->formatStateUsing(fn ($state) => ucwords($state))
+                ->description(fn ($state, $record): string => $record->user->email),
+
+                Tables\Columns\TextColumn::make('organization.org_name')
+                ->label(__('Organization'))
+                ->searchable()
+                ->sortable()
+                ->formatStateUsing(fn ($state) => ucwords($state)),
+
+                Tables\Columns\TextColumn::make('availability_status')
+                ->label(__('Availability'))
+                ->icon(fn ($state): string => match ($state) {
+                    AvailabilityStatusEnum::AVAILABLE->value => 'heroicon-o-check-circle',
+                    AvailabilityStatusEnum::BUSY->value => 'heroicon-o-arrow-path',
+                    AvailabilityStatusEnum::UNAVAILABLE->value => 'heroicon-o-x-circle',
+                })
+                ->badge()
+                ->color(fn ($state): string => match ($state) {
+                    AvailabilityStatusEnum::AVAILABLE->value => 'success',
+                    AvailabilityStatusEnum::BUSY->value => 'warning',
+                    AvailabilityStatusEnum::UNAVAILABLE->value => 'danger',
+                })
+                ->formatStateUsing(fn ($state) => Str::upper(AvailabilityStatusEnum::from($state)->value)),
+
+                Tables\Columns\TextColumn::make('verification_status')
+                ->label(__('Verification'))
+                ->icon(fn ($state): string => match ($state) {
+                    VerificationStatusEnum::PENDING->value => 'heroicon-o-clock',
+                    VerificationStatusEnum::VERIFIED->value => 'heroicon-o-check-circle',
+                    VerificationStatusEnum::REJECTED->value => 'heroicon-o-x-circle',
+                })
+                ->badge()
+                ->color(fn ($state): string => match ($state) {
+                    VerificationStatusEnum::PENDING->value => 'warning',
+                    VerificationStatusEnum::VERIFIED->value => 'success',
+                    VerificationStatusEnum::REJECTED->value => 'danger',
+                })
+                ->formatStateUsing(fn ($state) => Str::upper(VerificationStatusEnum::from($state)->value)),
+
+                Tables\Columns\ToggleColumn::make('is_active')
+                ->label(__('Status')),
+
+                Tables\Columns\TextColumn::make('notes')
+                ->label(__('Notes'))
+                ->toggleable(isToggledHiddenByDefault: true)
+                ->limit(70)
+                ->wrap()
+                ->formatStateUsing(fn ($state) => Str::ucfirst($state)),
+
+                Tables\Columns\TextColumn::make('created_at')
+                ->label(__('Created At'))
+                ->dateTime('F j, Y, g:i a')
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: true),
+
+
             ])
             ->filters([
                 //
@@ -125,7 +184,8 @@ class VolunteerResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\EditAction::make()
+                    ->slideOver(),
                     Tables\Actions\DeleteAction::make(),
                 ])->tooltip('Actions')
             ])

@@ -1,4 +1,5 @@
 <div>
+    {{-- @dd($regions) --}}
     <!-- Contact Us -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 
@@ -58,6 +59,39 @@
             </div>
             <!-- End Stats -->
 
+            <!--Alert-->
+            @if (session()->has('success'))
+            <div
+                x-data="{ show: true }"
+                x-init="setTimeout(() => show = false, 3000)"
+                x-show="show"
+                x-transition="fade"
+
+                class="bg-teal-50 border-t-2 border-teal-500 rounded-lg p-4 dark:bg-teal-800/30 mb-6" role="alert" tabindex="-1" aria-labelledby="hs-bordered-success-style-label">
+                    <div class="flex">
+                        <div class="shrink-0">
+                            <!-- Icon -->
+                            <span class="inline-flex justify-center items-center size-8 rounded-full border-4 border-teal-100 bg-teal-200 text-teal-800 dark:border-teal-900 dark:bg-teal-800 dark:text-teal-400">
+                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                                <path d="m9 12 2 2 4-4"></path>
+                            </svg>
+                            </span>
+                            <!-- End Icon -->
+                        </div>
+                        <div class="ms-3">
+                            <h3 id="hs-bordered-success-style-label" class="text-gray-800 font-semibold dark:text-white">
+                                {{ __('Successfully Applied.') }}
+                            </h3>
+                            <p class="text-sm text-gray-700 dark:text-neutral-400">
+                                {{ session('success') }}
+                            </p>
+                        </div>
+                    </div>
+            </div>
+            @endif
+            <!-- End of Alert -->
+
             <div class=" grid items-center lg:grid-cols-2 gap-6 lg:gap-16">
                 <!-- Card -->
                 <div class="flex flex-col border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 dark:border-neutral-700">
@@ -65,53 +99,13 @@
                     Fill in the form
                 </h2>
 
-                <form>
+                <form wire:submit.prevent="submit">
                     <div class="space-y-4">
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <!-- Input -->
                             <div class="relative">
-                                <input type="text" id="latitude" name="latitude" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
-                                focus:pt-6
-                                focus:pb-2
-                                not-placeholder-shown:pt-6
-                                not-placeholder-shown:pb-2
-                                autofill:pt-6
-                                autofill:pb-2" placeholder="Latitude" readonly="" required>
-                                <label for="latitude" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                                peer-focus:text-xs
-                                peer-focus:-translate-y-1.5
-                                peer-focus:text-neutral-400
-                                peer-not-placeholder-shown:text-xs
-                                peer-not-placeholder-shown:-translate-y-1.5
-                                peer-not-placeholder-shown:text-neutral-400">Latitude</label>
-                            </div>
-                            <!-- End Input -->
-
-                            <!-- Input -->
-                            <div class="relative">
-                                <input type="text" id="longitude" name="longitude" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
-                                focus:pt-6
-                                focus:pb-2
-                                not-placeholder-shown:pt-6
-                                not-placeholder-shown:pb-2
-                                autofill:pt-6
-                                autofill:pb-2" placeholder="Longitude" readonly="" required>
-                                <label for="longitude" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                                peer-focus:text-xs
-                                peer-focus:-translate-y-1.5
-                                peer-focus:text-neutral-400
-                                peer-not-placeholder-shown:text-xs
-                                peer-not-placeholder-shown:-translate-y-1.5
-                                peer-not-placeholder-shown:text-neutral-400">Longitude</label>
-                            </div>
-                            <!-- End Input -->
-
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Input -->
-                            <div class="relative">
-                                <input type="text" id="first_name" name="first_name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                <input type="text" wire:model.blur='first_name' id="first_name" name="first_name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
                                 focus:pt-6
                                 focus:pb-2
                                 not-placeholder-shown:pt-6
@@ -125,12 +119,15 @@
                                 peer-not-placeholder-shown:text-xs
                                 peer-not-placeholder-shown:-translate-y-1.5
                                 peer-not-placeholder-shown:text-neutral-400">First Name</label>
+                                @error('first_name')
+                                <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                @enderror
                             </div>
                             <!-- End Input -->
 
                             <!-- Input -->
                             <div class="relative">
-                                <input type="text" id="last_name" name="last_name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                                <input type="text" wire:model.blur='last_name' id="last_name" name="last_name" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
                                 focus:pt-6
                                 focus:pb-2
                                 not-placeholder-shown:pt-6
@@ -144,13 +141,18 @@
                                 peer-not-placeholder-shown:text-xs
                                 peer-not-placeholder-shown:-translate-y-1.5
                                 peer-not-placeholder-shown:text-neutral-400">Last Name</label>
+
+                                @error('last_name')
+                                <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                                @enderror
                             </div>
                             <!-- End Input -->
+
                         </div>
 
                     <!-- Input -->
                     <div class="relative">
-                        <input type="text" id="email" name="email" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                        <input type="text" wire:model.blur='email' id="email" name="email" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
                         focus:pt-6
                         focus:pb-2
                         not-placeholder-shown:pt-6
@@ -164,12 +166,16 @@
                         peer-not-placeholder-shown:text-xs
                         peer-not-placeholder-shown:-translate-y-1.5
                         peer-not-placeholder-shown:text-neutral-400">Email</label>
+
+                        @error('email')
+                            <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
                     </div>
                     <!-- End Input -->
 
                     <!-- Input -->
                     <div class="relative">
-                        <input type="text" id="phone" name="phone" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                        <input type="text" wire:model.blur='phone' id="phone" name="phone" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
                         focus:pt-6
                         focus:pb-2
                         not-placeholder-shown:pt-6
@@ -183,36 +189,162 @@
                         peer-not-placeholder-shown:text-xs
                         peer-not-placeholder-shown:-translate-y-1.5
                         peer-not-placeholder-shown:text-neutral-400">Phone</label>
+
+                        @error('phone')
+                            <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
                     </div>
                     <!-- End Input -->
 
-                    <!-- Floating Select -->
+                    <!-- Select -->
+
+                    {{-- Region --}}
+                    <div class="space-y-1" wire:ignore >
+                        <select
+                            wire:model.live="selectedRegion"
+                            id="region_code"
+                            name="region_code"
+                            class="bg-white dark:bg-neutral-900 border border-gray-300 dark:border-neutral-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:text-white"
+                            data-hs-select='{
+                                "hasSearch": true,
+                                "searchLimit": 8,
+                                "searchPlaceholder": "Search region...",
+                                "placeholder": "Select region",
+                                "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-hidden focus:ring-2 focus:ring-red-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200 dark:focus:outline-hidden dark:focus:ring-1 dark:focus:ring-neutral-600",
+                                "dropdownClasses": "mt-2 max-h-72 pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                                "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                                "searchClasses": "block w-full sm:text-sm border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 before:absolute before:inset-0 before:z-1 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-1.5 sm:py-2 px-3",
+                                "searchWrapperClasses": "sticky top-0 z-10 bg-white p-2 dark:bg-neutral-800",
+                                "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
+                                "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                            }'>
+                            <option value="">{{  __('Select region')}}</option>
+                            @foreach ($regions as $region)
+                                <option wire:key="{{ 'region-' . $region->id }}" value="{{ $region->id }}">{{ $region->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('selectedRegion')
+                            <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    {{-- Province --}}
+                    @if ($selectedRegion)
+                    <div class="space-y-1 mt-4">
+                        <select
+                            data-hs-select='{
+                                "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                            }'
+
+                            wire:model.live="selectedProvince"
+                            id="province_code"
+                            name="province_code"
+                            class="bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:text-white">
+                            <option value="">{{ __('Select province') }}</option>
+                            @foreach ($provinces as $province)
+                                <option wire:key="{{ 'province-' . $province->id }}" value="{{ $province->id }}">{{ $province->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('selectedProvince')
+                            <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    @endif
+
+                    {{-- City --}}
+                    @if ($selectedProvince)
+                    <div class="space-y-1 mt-4">
+                        <select
+                            wire:model.live="selectedCity"
+                            id="city_code"
+                            name="city_code"
+                            class="bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:text-white">
+                            <option value="">{{ __('Select city') }}</option>
+                            @foreach ($cities as $city)
+                                <option wire:key="{{ 'city-' . $city->id }}" value="{{ $city->id }}">{{ $city->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('selectedCity')
+                            <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    @endif
+
+                    {{-- Barangay --}}
+                    @if ($selectedCity)
+                    <div class="space-y-1 mt-4">
+                        <select
+                            wire:model.live="selectedBarangay"
+                            id="barangay_code"
+                            name="barangay_code"
+                            class="bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:text-white">
+                            <option value="">Select barangay</option>
+                            @foreach ($barangays as $barangay)
+                                <option wire:key="{{ 'barangay-' . $barangay->id }}" value="{{ $barangay->id }}">{{ $barangay->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('selectedBarangay')
+                            <span class="text-sm text-red-600 mt-1 block">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    @endif
+
+                    <!-- End Select -->
+                    @if($selectedBarangay)
+                    <!-- Input -->
                     <div class="relative">
-                        <select class="peer p-4 pe-9 block w-full block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent
+                        <input type="text" wire:model.blur="street" name="street" id="street" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
                         focus:pt-6
                         focus:pb-2
                         not-placeholder-shown:pt-6
                         not-placeholder-shown:pb-2
                         autofill:pt-6
-                        autofill:pb-2">
-                        <option selected="">Open this select menu</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        </select>
-                        <label class="absolute top-0 start-0 p-4 h-full truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                        autofill:pb-2" placeholder="Street">
+                        <label for="phone" class="absolute top-0 start-0 p-3 sm:p-4 h-full text-neutral-400 text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none
                         peer-focus:text-xs
                         peer-focus:-translate-y-1.5
-                        peer-focus:text-gray-500 dark:peer-focus:text-neutral-500
+                        peer-focus:text-neutral-400
                         peer-not-placeholder-shown:text-xs
                         peer-not-placeholder-shown:-translate-y-1.5
-                        peer-not-placeholder-shown:text-gray-500 dark:peer-not-placeholder-shown:text-neutral-500 dark:text-neutral-500">Organization</label>
+                        peer-not-placeholder-shown:text-neutral-400">Street</label>
                     </div>
-                    <!-- End Floating Select -->
+                    <!-- End Input -->
+                    @endif
+
+                    <!-- Select Organization -->
+                    <div wire.ignore>
+                    <select
+                        data-hs-select='{
+                            "searchable": true,
+                            "hasSearch": true,
+                            "searchLimit": 8,
+                            "searchPlaceholder": "Search Organization...",
+                            "placeholder": "Select Organization",
+                            "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                            "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-hidden focus:ring-2 focus:ring-red-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200 dark:focus:outline-hidden dark:focus:ring-1 dark:focus:ring-neutral-600",
+                            "dropdownClasses": "mt-2 max-h-72 pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                            "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                            "searchClasses": "block w-full sm:text-sm border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 before:absolute before:inset-0 before:z-1 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-1.5 sm:py-2 px-3",
+                            "searchWrapperClasses": "sticky top-0 z-10 bg-white p-2 dark:bg-neutral-800",
+                            "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
+                            "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                        }'
+                        wire:model.live="selectedOrganization"
+                        class="py-3 px-4 pe-9 block w-full bg-gray-800 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-700 dark:border-transparent dark:text-neutral-400 dark:focus:ring-neutral-600">
+                        <option selected="">Select Organization</option>
+                        @foreach ($organizations as $organization)
+                        <option wire:key="organization-{{ $organization->id }}" value="{{ $organization->id }}">{{ $organization->org_name }}</option>
+                        @endforeach
+
+                    </select>
+                    </div>
+                    <!-- end select of organization -->
+
 
                     <!-- Textarea -->
                     <div class="relative">
-                        <textarea id="notes" name="notes" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
+                        <textarea wire:model.blur="notes" id="notes" name="notes" rows="6" class="peer p-3 sm:p-4 block w-full bg-neutral-200 dark:bg-neutral-800 border-transparent rounded-lg sm:text-sm text-nutral-500 dark:text-white placeholder:text-transparent focus:outline-hidden focus:ring-0 focus:border-transparent disabled:opacity-50 disabled:pointer-events-none
                         focus:pt-6
                         focus:pb-2
                         not-placeholder-shown:pt-6
@@ -232,14 +364,18 @@
 
                     <div class="mt-2">
                     <p class="text-xs text-neutral-500">
-                        All fields are required
+                        {{ __('All fields are required') }}
+                    </p>
+
+                    <p class="text-sm font-semibold mt-5 text-neutral-500">
+                        {{ __('We will get back to you in 1-2 business days') }}
                     </p>
 
                     <p class="mt-5">
-                        <a class="group inline-flex items-center gap-x-2 py-3 px-4 bg-red-600 font-medium text-sm text-neutral-800 rounded-lg focus:outline-hidden" href="#">
-                        Submit
+                        <button type="submit" class="group inline-flex items-center gap-x-2 py-3 px-4 bg-red-600 font-medium text-sm text-neutral-200 rounded-lg focus:outline-hidden cursor-pointer">
+                        {{ __('Submit') }}
                         <svg class="shrink-0 size-4 transition group-hover:translate-x-0.5 group-hover:translate-x-0 group-focus:translate-x-0.5 group-focus:translate-x-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
+                        </button>
                     </p>
                     </div>
                 </form>
