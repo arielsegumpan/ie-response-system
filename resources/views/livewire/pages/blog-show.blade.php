@@ -57,15 +57,15 @@
 
                         </div>
 
+                        @if($blog->featured_img)
+                        <div class="text-center">
+                            <img class="w-full rounded-xl my-6 h-90 object-cover" src="{{ asset(Storage::url($blog->featured_img)) }}" alt="{{ $blog->title }}">
+                        </div>
+                        @endif
+
                         <div class="text-lg text-gray-800 dark:text-neutral-200">
                         {!! str($blog->content)->sanitizeHtml() !!}
                         </div>
-
-                        @if($blog->featured_img)
-                        <div class="text-center">
-                            <img class="w-full rounded-xl my-6" src="{{ asset(Storage::url($blog->featured_img)) }}" alt="{{ $blog->title }}">
-                        </div>
-                        @endif
 
                         @if(is_array($blog->images))
                         <div class="grid lg:grid-cols-3 gap-4 mt-6">
