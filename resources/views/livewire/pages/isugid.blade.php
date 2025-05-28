@@ -486,8 +486,8 @@
                 if (!mapContainer || mapContainer.dataset.mapInitialized === 'true') return;
 
                 const map = L.map('hs-pin-leaflet', {
-                    center: [10.885, 123.075],
-                    zoom: 13
+                    center: [10.902693, 123.072609],
+                    zoom: 15
                 });
 
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

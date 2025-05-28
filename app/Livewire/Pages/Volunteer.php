@@ -176,8 +176,6 @@ class Volunteer extends Component
             return null;
         }
 
-
-
     }
     #[Layout('layouts.app')]
     public function render()
