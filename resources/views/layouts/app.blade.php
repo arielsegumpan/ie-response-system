@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!--add this for ngrok-->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         @stack('meta')
         <title>{{ $title ?? config('app.name') }}</title>
@@ -113,6 +114,17 @@
         <main>
             {{ $slot }}
         </main>
+
+        {{-- ADD THIS HEADER TO IGNORE IN NGROK --}}
+        <script>
+            axios.get("https://your-ngrok-url.ngrok-free.app/api/endpoint", {
+                headers: {
+                    "ngrok-skip-browser-warning": "true"
+                }
+            });
+        </script>
+        {{-- END OF NGROK IGNORE HEADER --}}
+
 
         <livewire:partials.footer />
         @livewireScripts

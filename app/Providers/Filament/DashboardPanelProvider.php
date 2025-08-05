@@ -7,6 +7,7 @@ use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Illuminate\Support\Facades\URL;
 use App\Filament\Pages\Auth\EditProfile;
 use Filament\Navigation\NavigationGroup;
 use Filament\Http\Middleware\Authenticate;
@@ -24,6 +25,7 @@ class DashboardPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        URL::forceScheme('https');
         return $panel
             ->default()
             ->id('dashboard')
@@ -37,6 +39,7 @@ class DashboardPanelProvider extends PanelProvider
             ->favicon(asset('imgs/ie-logo.png'))
             // ->sidebarCollapsibleOnDesktop()
             ->registration()
+            ->sidebarWidth('17rem')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
