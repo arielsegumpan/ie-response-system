@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Pages\BlogExtras\TagPosts;
 use App\Livewire\Pages\BlogExtras\CategoryPosts;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
 Route::get('/', IndexPage::class)->name('page.home');
 Route::get('/isugid', Isugid::class)->name('page.isugid');
 Route::get('/blogs', Blog::class)->name('page.blog');
@@ -26,4 +21,4 @@ Route::get('/contact', Contact::class)->name('page.contact');
 Route::get('/incidents/{incident_number}', Incidents::class)->name('page.incident.show');
 Route::get('/category/{slug}', CategoryPosts::class)->name('page.blog.category');
 Route::get('/tag/{slug}', TagPosts::class)->name('page.blog.tag');
-Route::get('/volunteer', Volunteer::class)->name('page.volunteer');
+Route::get('/responder', Volunteer::class)->name('page.responder');

@@ -1,12 +1,11 @@
 <div>
-    {{-- @dd($regions) --}}
     <!-- Contact Us -->
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 
         <div class="max-w-2xl lg:max-w-5xl mx-auto">
             <div class="text-center">
                 <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
-                    Volunteer with Us!
+                    Be <span class="text-red-500">ONE</span> of Us!
                 </h1>
                 <p class="mt-1 text-gray-600 dark:text-neutral-400">
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum perspiciatis corrupti expedita, facilis rerum harum!

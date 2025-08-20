@@ -12,6 +12,7 @@ use Livewire\Attributes\Title;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use App\Models\IncidentLocation;
+use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,7 @@ class Isugid extends Component
 
     public $incidentTypes;
 
+    #[Computed()]
     public function mount(){
         $this->incidentTypes = IncidentType::all();
     }

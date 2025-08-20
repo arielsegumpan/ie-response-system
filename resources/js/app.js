@@ -1,6 +1,5 @@
 import './bootstrap';
 import 'preline'
-
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -17,7 +16,6 @@ L.Icon.Default.mergeOptions({
 });
 
 window.L = L;
-
 
 const html = document.querySelector('html');
 const isLightOrAuto = localStorage.getItem('hs_theme') === 'light' || (localStorage.getItem('hs_theme') === 'auto' && !window.matchMedia('(prefers-color-scheme: dark)').matches);

@@ -7,6 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Organization;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use App\Models\Volunteer as VolunteerM;
 use Woenel\Prpcmblmts\Models\PhilippineCity;
@@ -73,9 +74,10 @@ class Volunteer extends Component
         ];
     }
 
+    #[Computed()]
     public function mount()
     {
-        $this->regions =  PhilippineRegion::orderBy('name')->get();
+        $this->regions =  PhilippineRegion::query()->orderBy('name')->get(); //nag dugang query() method
         $this->organizations = Organization::all();
     }
 

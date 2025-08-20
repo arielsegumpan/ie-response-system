@@ -45,11 +45,11 @@
                 </button>
             </div>
 
-            <a href="{{ route('filament.dashboard.auth.login') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl bg-white border border-gray-200 text-black hover:bg-gray-100 focus:outline-hidden focus:bg-nuetral-800 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-white/10 dark:text-white dark:hover:text-white dark:focus:text-white">
+            <a href="{{ route('filament.auth.auth.login') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl bg-white border border-gray-200 text-black hover:bg-gray-100 focus:outline-hidden focus:bg-nuetral-800 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-white/10 dark:text-white dark:hover:text-white dark:focus:text-white">
                 {{ __('Sign in') }}
             </a>
 
-            <a href="{{ route('filament.dashboard.auth.register') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-red-600 text-white hover:bg-red-500 focus:outline-hidden focus:bg-red-600 transition disabled:opacity-50 disabled:pointer-events-none">
+            <a href="{{ route('filament.auth.auth.register') }}" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-red-600 text-white hover:bg-red-500 focus:outline-hidden focus:bg-red-600 transition disabled:opacity-50 disabled:pointer-events-none">
                 {{ __('Sign up') }}
             </a>
 
@@ -72,9 +72,9 @@
                     </a>
                 </div>
                 <div>
-                    <a class="{{ request()->routeIs('page.volunteer') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-600 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
-                        href="{{ route('page.volunteer') }}">
-                        {{ __('Volunteer') }}
+                    <a class="{{ request()->routeIs('page.responder') ? 'relative inline-block text-black focus:outline-hidden before:absolute before:bottom-0.5 before:start-0 before:-z-1 before:w-full before:h-1 before:bg-red-600 dark:text-white' : 'inline-block text-black hover:text-gray-600 focus:outline-hidden focus:text-gray-600 dark:text-white dark:hover:text-neutral-300 dark:focus:text-neutral-300' }}"
+                        href="{{ route('page.responder') }}">
+                        {{ __('Responder') }}
                     </a>
                 </div>
                 <div>
