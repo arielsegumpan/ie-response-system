@@ -14,7 +14,7 @@
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Grid -->
         <div class="grid lg:grid-cols-2 gap-6">
-            @foreach ($postsTags as $postsTag)
+            @foreach ($this->postsTags as $postsTag)
                 <!-- Card -->
                 <a wire:key="blog-{{ $postsTag->id }}" class="group relative block rounded-xl focus:outline-hidden" href="{{ route('page.blog.show', $postsTag->slug) }}">
 
@@ -59,7 +59,7 @@
     <!-- End Card Blog -->
 
     <!-- Pagination -->
-    @if ($postsTags->hasPages())
+    @if ($this->postsTags->hasPages())
     <nav class="flex justify-between items-center gap-x-1 mt-6" aria-label="Pagination">
         {{-- Previous Page --}}
         <button

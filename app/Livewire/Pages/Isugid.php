@@ -31,8 +31,8 @@ class Isugid extends Component
     public $incidentTypes;
 
     #[Computed()]
-    public function mount(){
-        $this->incidentTypes = IncidentType::all();
+    public function incidentTypes(){
+        return IncidentType::all();
     }
 
     protected function rules(): array
@@ -184,8 +184,6 @@ class Isugid extends Component
     #[Title('Isugid')]
     public function render()
     {
-        return view('livewire.pages.isugid',[
-            'incidentTypes' => $this->incidentTypes,
-        ]);
+        return view('livewire.pages.isugid');
     }
 }

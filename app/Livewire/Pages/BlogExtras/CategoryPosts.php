@@ -5,10 +5,12 @@ namespace App\Livewire\Pages\BlogExtras;
 use App\Models\Blog;
 use Livewire\Component;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Str;
+
 class CategoryPosts extends Component
 {
     use WithPagination;
@@ -22,10 +24,10 @@ class CategoryPosts extends Component
         $this->category = Category::where('cat_slug', $slug)->firstOrFail();
     }
 
-    #[Layout('layouts.app')]
-    public function render()
+    #[Computed()]
+    public function postsCategories()
     {
-        $postsCategories = Blog::whereHas('categories', function ($query) {
+        return Blog::query()->whereHas('categories', function ($query) {
             $query->where('cat_slug', $this->slug);
         })
         ->where('is_visible', 1)
@@ -35,9 +37,11 @@ class CategoryPosts extends Component
             $post->content = Str::limit(strip_tags($post->content), 70);
             return $post;
         });
+    }
 
-        return view('livewire.pages.blog-extras.category-posts', [
-            'postsCategories' => $postsCategories,
-        ]);
+    #[Layout('layouts.app')]
+    public function render()
+    {
+        return view('livewire.pages.blog-extras.category-posts');
     }
 }

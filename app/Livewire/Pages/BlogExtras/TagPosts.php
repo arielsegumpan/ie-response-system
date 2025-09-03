@@ -5,10 +5,11 @@ namespace App\Livewire\Pages\BlogExtras;
 use App\Models\Tag;
 use App\Models\Blog;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Str;
 
 class TagPosts extends Component
 {
@@ -23,11 +24,11 @@ class TagPosts extends Component
         $this->tag = Tag::where('tag_slug', $slug)->firstOrFail();
     }
 
-    #[Layout('layouts.app')]
-    public function render()
-    {
 
-        $postsTags = Blog::whereHas('tags', function ($query) {
+    #[Computed()]
+    public function postsTags()
+    {
+        return Blog::query()->whereHas('tags', function ($query) {
             $query->where('tag_slug', $this->slug);
         })
         ->where('is_visible', 1)
@@ -37,10 +38,11 @@ class TagPosts extends Component
             $post->content = Str::limit(strip_tags($post->content), 70);
             return $post;
         });
+    }
 
-
-        return view('livewire.pages.blog-extras.tag-posts',[
-            'postsTags' => $postsTags
-        ]);
+    #[Layout('layouts.app')]
+    public function render()
+    {
+        return view('livewire.pages.blog-extras.tag-posts');
     }
 }

@@ -154,8 +154,8 @@
 
         <!-- Grid -->
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 lg:mb-14">
-            @if (count($featuredPosts) != 0)
-            @foreach ($featuredPosts as $featPost)
+            @if (count($this->featuredPosts) != 0)
+            @foreach ($this->featuredPosts as $featPost)
             <!-- Card -->
             <a wire:key="blog-{{ $featPost->id }}" class="group flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl hover:shadow-md focus:outline-hidden focus:shadow-md transition dark:bg-neutral-900 dark:border-neutral-800" href="{{ route('page.blog.show', $featPost->slug) }}">
                 <div class="aspect-w-16 aspect-h-9">
@@ -185,7 +185,7 @@
         <script>
             let mostRecentMarker = null;
 
-            window.incidents = @json($incidents);
+            window.incidents = @json($this->incidents);
             window.addEventListener('load', () => {
                 const map = L.map('hs-pin-leaflet', {
                     center: [10.901002750609775, 123.07139009929351],
@@ -273,7 +273,6 @@
                         }
                     });
 
-                    // 🔥 Open popup for the most recent incident
                     if (mostRecentMarker) {
                         mostRecentMarker.openPopup();
                     }

@@ -3,9 +3,10 @@
 namespace App\Livewire\Pages;
 
 use App\Models\Blog;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
+use Illuminate\Database\Eloquent\Collection;
 
 class BlogShow extends Component
 {
@@ -13,6 +14,7 @@ class BlogShow extends Component
     public Collection $relatedBlogs;
     public array $meta = [];
 
+    #[Computed()]
     public function mount($slug)
     {
         $this->blog = Blog::with([

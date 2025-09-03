@@ -229,7 +229,7 @@
                                     }'
                                     >
                                     <option value="">Select incident type</option>
-                                    @foreach ($incidentTypes as $type)
+                                    @foreach ($this->incidentTypes as $type)
                                         <option value="{{ $type->id }}">{{ $type->inc_name }}</option>
                                     @endforeach
                                     </select>

@@ -22,8 +22,6 @@ class Volunteer extends Component
     public $cities = [];
     public $barangays;
 
-
-
     public $selectedRegion, $selectedProvince, $selectedCity, $selectedBarangay, $selectedOrganization;
     public string $street = '';
     public string $notes = '';

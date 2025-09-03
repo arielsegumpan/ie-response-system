@@ -1,45 +1,45 @@
 <div>
 
     <!-- Card Blog -->
-    @if($featuredPost)
+    @if($this->featuredPost)
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Grid -->
         <div class="grid sm:grid-cols-2 sm:items-center gap-8">
             <div class="sm:order-2">
                 <div class="relative pt-[50%] sm:pt-[100%] rounded-lg">
-                    <img class="size-full absolute top-0 start-0 object-cover rounded-[2rem] lg:h-[550px]" src="{{ asset(Storage::url($featuredPost->featured_img)) ?? 'https://via.placeholder.com/560x550' }}" alt="Blog Image">
+                    <img class="size-full absolute top-0 start-0 object-cover rounded-[2rem] lg:h-[550px]" src="{{ asset(Storage::url($this->featuredPost->featured_img)) ?? 'https://via.placeholder.com/560x550' }}" alt="Blog Image">
                 </div>
             </div>
 
             <div class="sm:order-1">
                 <p class="mb-5 inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium bg-gray-100 text-gray-800 dark:bg-neutral-800 dark:text-neutral-200">
-                    {{ $featuredPost->categories->first()->cat_name ?? 'Uncategorized' }}
+                    {{ $this->featuredPost->categories->first()->cat_name ?? 'Uncategorized' }}
                 </p>
 
                 <h2 class="text-2xl font-bold md:text-3xl lg:text-4xl lg:leading-tight xl:text-5xl xl:leading-tight text-gray-800 dark:text-neutral-200">
-                    <a class="hover:text-red-600 focus:outline-hidden focus:text-red-600 dark:text-neutral-300 dark:hover:text-white dark:focus:text-white" href="{{ route('page.blog.show', $featuredPost->slug) }}">
-                        {{ $featuredPost->title }}
+                    <a class="hover:text-red-600 focus:outline-hidden focus:text-red-600 dark:text-neutral-300 dark:hover:text-white dark:focus:text-white" href="{{ route('page.blog.show', $this->featuredPost->slug) }}">
+                        {{ $this->featuredPost->title }}
                     </a>
                 </h2>
 
                 <!-- Avatar -->
                 <div class="mt-6 sm:mt-10 flex items-center">
                     <div class="shrink-0">
-                        <img class="size-10 sm:h-14 sm:w-14 rounded-full" src="{{ $featuredPost->user->avatar_url ?? 'https://ui-avatars.com/api/?name=' . $featuredPost->user->name . '&background=f44336&color=fff' }}" alt="{{ $featuredPost->user->name }}">
+                        <img class="size-10 sm:h-14 sm:w-14 rounded-full" src="{{ $this->featuredPost->user->avatar_url ?? 'https://ui-avatars.com/api/?name=' . $this->featuredPost->user->name . '&background=f44336&color=fff' }}" alt="{{ $this->featuredPost->user->name }}">
                     </div>
 
                     <div class="ms-3 sm:ms-4">
                         <p class="sm:mb-1 font-semibold text-gray-800 dark:text-neutral-200">
-                            {{ $featuredPost->user->name ?? 'Unknown Author' }}
+                            {{ $this->featuredPost->user->name ?? 'Unknown Author' }}
                         </p>
                         <p class="text-xs text-gray-500 dark:text-neutral-500">
-                            {{ $featuredPost->author_role ?? 'Contributor' }}
+                            {{ $this->featuredPost->author_role ?? 'Contributor' }}
                         </p>
                     </div>
                 </div>
 
                 <div class="mt-5">
-                    <a class="inline-flex items-center gap-x-1.5 text-red-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-red-500" href="{{ route('page.blog.show', $featuredPost->slug) }}">
+                    <a class="inline-flex items-center gap-x-1.5 text-red-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-red-500" href="{{ route('page.blog.show', $this->featuredPost->slug) }}">
                         {{ __('Read more') }}
                         <svg class="shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
                     </a>
@@ -55,7 +55,7 @@
     <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Grid -->
         <div class="grid lg:grid-cols-2 gap-6">
-            @foreach ($blogs as $post)
+            @foreach ($this->blogs as $post)
                 <!-- Card -->
                 <a wire:key="blog-{{ $post->id }}" class="group relative block rounded-xl focus:outline-hidden" href="{{ route('page.blog.show', $post->slug) }}">
 
@@ -100,7 +100,7 @@
     <!-- End Card Blog -->
 
     <!-- Pagination -->
-    @if ($blogs->hasPages())
+    @if ($this->blogs->hasPages())
     <nav class="flex justify-between items-center gap-x-1 mt-6" aria-label="Pagination">
         {{-- Previous Page --}}
         <button
@@ -109,9 +109,9 @@
             @class([
                 'min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg',
                 'text-gray-800 hover:bg-gray-100 focus:bg-gray-100 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10',
-                'disabled:opacity-50 disabled:pointer-events-none' => !$blogs->onFirstPage()
+                'disabled:opacity-50 disabled:pointer-events-none' => !$this->blogs->onFirstPage()
             ])
-            @disabled($blogs->onFirstPage())
+            @disabled($this->blogs->onFirstPage())
             aria-label="Previous"
         >
             <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,15 +122,15 @@
 
         {{-- Page Numbers --}}
         <div class="flex items-center gap-x-1">
-            @foreach ($blogs->getUrlRange(1, $blogs->lastPage()) as $page => $url)
+            @foreach ($this->blogs->getUrlRange(1, $this->blogs->lastPage()) as $page => $url)
                 <button
                     wire:click="gotoPage({{ $page }})"
                     @class([
                         'min-h-9.5 min-w-9.5 flex justify-center items-center py-2 px-3 text-sm rounded-lg',
                         'text-gray-800 hover:bg-gray-100 focus:bg-gray-100 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10',
-                        'bg-gray-200 dark:bg-neutral-600' => $page === $blogs->currentPage()
+                        'bg-gray-200 dark:bg-neutral-600' => $page === $this->blogs->currentPage()
                     ])
-                    aria-current="{{ $page === $blogs->currentPage() ? 'page' : 'false' }}"
+                    aria-current="{{ $page === $this->blogs->currentPage() ? 'page' : 'false' }}"
                 >
                     {{ $page }}
                 </button>
@@ -144,9 +144,9 @@
             @class([
                 'min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg',
                 'text-gray-800 hover:bg-gray-100 focus:bg-gray-100 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10',
-                'disabled:opacity-50 disabled:pointer-events-none' => !$blogs->hasMorePages()
+                'disabled:opacity-50 disabled:pointer-events-none' => !$this->blogs->hasMorePages()
             ])
-            @disabled(!$blogs->hasMorePages())
+            @disabled(!$this->blogs->hasMorePages())
             aria-label="Next"
         >
             <span class="hidden sm:block">Next</span>

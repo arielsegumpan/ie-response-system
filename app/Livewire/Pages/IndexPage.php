@@ -8,15 +8,18 @@ use Livewire\Component;
 use App\Models\Incident;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Storage;
 
 class IndexPage extends Component
 {
 
     public $incidents;
-    public function getFeaturedPosts()
+
+    #[Computed()]
+    public function featuredPosts()
     {
-        return Blog::with([
+        return Blog::query()->with([
             'categories:id,cat_name,cat_slug',
             'tags:id,tag_name,tag_slug'
             ])
@@ -28,9 +31,10 @@ class IndexPage extends Component
 
     }
 
-    public function mount()
+    #[Computed()]
+    public function incidents()
     {
-        $this->incidents = Incident::with([
+        return Incident::query()->with([
             'type',
             'location',
             'images' => function ($query) {
@@ -58,11 +62,6 @@ class IndexPage extends Component
     #[Title('Home')]
     public function render()
     {
-
-        // dd($this->incidents);
-        return view('livewire.pages.index-page',[
-            'featuredPosts' => $this->getFeaturedPosts(),
-            'incidents' => $this->incidents
-        ]);
+        return view('livewire.pages.index-page');
     }
 }

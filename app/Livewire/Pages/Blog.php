@@ -2,20 +2,22 @@
 
 namespace App\Livewire\Pages;
 
-use App\Models\Blog as Blogs;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
+use App\Models\Blog as Blogs;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
 
 class Blog extends Component
 {
     use WithPagination;
 
-    public function getBlogs()
+    #[Computed()]
+    public function blogs()
     {
-        return Blogs::with([
+        return Blogs::query()->with([
             'categories:id,cat_name,cat_slug',
             'tags:id,tag_name,tag_slug'
             ])
@@ -28,9 +30,10 @@ class Blog extends Component
             });
     }
 
-    public function getFeaturedPost()
+    #[Computed()]
+    public function featuredPost()
     {
-        return Blogs::with([
+        return Blogs::query()->with([
             'categories:id,cat_name,cat_slug',
             'tags:id,tag_name,tag_slug'
         ])
@@ -44,9 +47,6 @@ class Blog extends Component
     #[Title('Blog')]
     public function render()
     {
-        return view('livewire.pages.blog', [
-            'blogs' => $this->getBlogs(),
-            'featuredPost' => $this->getFeaturedPost()
-        ]);
+        return view('livewire.pages.blog');
     }
 }

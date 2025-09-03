@@ -1,5 +1,4 @@
 <div>
-    {{-- @dd($this->incident) --}}
     <!-- Invoice -->
     <div class="max-w-[85rem] px-4 lg:px-8 mx-auto my-4 sm:my-10">
         <div class="sm:w-11/12 lg:w-3/4 mx-auto">
